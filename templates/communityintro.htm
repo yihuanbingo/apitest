@@ -1,0 +1,47 @@
+{include file="library/page_header.htm"}
+
+{if $act==default}
+<div class="gheader">
+  <div class="gtitle">选择小区</div>
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+
+<div style="padding:10px;">
+   <a href="communityintro.html?act=intro">
+   <div class="srp" style="border:1px solid #ddd;">
+    <div class="titleContent">
+	  {$community_name}介绍
+	</div>
+   </div>
+   </a>
+   
+   <a href="bind.html?redirectUrl=communityintro.html">
+   <div class="srp" style="border:1px solid #ddd;border-top:0">
+    <div class="titleContent">
+	  重新绑定
+	</div>
+   </div>
+   </a>
+</div>
+
+</div>
+</div>
+</div>
+
+{include file="library/page_footer.htm"}
+{/if}
+
+{if $act==intro}
+<div class="onepageview">
+ <h2>{$row.community_name}介绍</h2>
+ <hr>
+ <div class="updatetime">{$row.verify_time}</div>
+ <div class="content">
+  {$row.intro}  
+ </div><br>
+</div>
+{/if}

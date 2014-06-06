@@ -1,0 +1,167 @@
+{include file="library/page_header.htm"}
+
+<div class="gheader">
+  {if $act==householder}<a href="bind.html?act=householder"><div class="gtitle">绑定物业</div></a>{else}
+  <a href="bind.html"><div class="gtitle">绑定小区</div></a>{/if}
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+
+{if $act==community}
+<form style="margin:10px auto 0;" action="bind.html" method="post" enctype="multipart/form-data" id="bind">
+<table width="100%" cellspacing="10px">
+<tr>
+ <td class="input"><input type="text" name="keywords" class="input" style="border:0" placeholder="请输入所在小区名称" value="{$keywords}"></td>
+<tr>
+ <td align="center">
+    <input type="hidden" name="act" value="search" >
+	<input type="hidden" name="type" value="community"> 
+    <a href="javascript:void(0);" onclick="javascript:AjaxSubmit('bind',true);"><div class="submit">搜索小区</div></a>
+ </td>
+</tr>
+</table>
+</form>
+ <div class="clear"></div>
+ {if !empty($keywords)}
+  <div style="padding:0 10px 10px;">
+  {if empty($res)} 
+    Sorry，没有找到 <span class="red">{$keywords}</span> 相关的小区！
+  {else}
+  {foreach $res as $k=>$r}
+   <a href="javascript:void(0);" onclick="javascript:setCommunityBind({$r.community_id});">
+   <div class="srp" style="border:1px solid #ddd;{if $k>0}border-top:0{/if}">
+    <div class="titleContent">
+	  {$r.community_name}
+	</div>
+   </div>
+   </a>
+  {/foreach}
+  {include file="library/page.htm"}
+  <script type="text/javascript">
+   /* 绑定到小区 */
+   function setCommunityBind(community_id)
+   {
+      if(confirm("确认绑定到该小区？若已绑定小区，该操作会解绑原来的小区，并重新绑定！"))
+	  {
+	     $.post("bind.html", {
+		 act:'act_community', community_id:community_id },
+    function(data)
+    {
+	   var data = json_decode(data);
+	   if(data.error==0)
+	   {
+	     alertMsg(data.data);
+		 if(data.href)
+		 {
+		     setTimeout(function(){
+			 window.location.href=data.href},1500);
+		 }
+		 else
+		 {
+	         setTimeout("window.location.reload();",1500);
+	     }
+	   }
+	   if(data.error==1)
+	   {
+		 confirm(data.data);   
+	   }
+    });
+	  }   
+   }
+  </script>
+  {/if}
+  </div>
+ {/if}
+{/if}
+
+{if $act==householder}
+<form style="margin:10px auto 0;" action="bind.html" method="post" enctype="multipart/form-data" id="bind">
+<table width="100%" cellspacing="10px">
+<tr>
+ <td class="input">
+  <input type="text" name="keywords" class="input" style="border:0" placeholder="请输入物业绑定码" value="{$keywords}" />
+ </td>
+</tr> 
+<tr>
+ <td class="color999">您的<span class="red">绑定码</span>为业主留在物业中心的<font class="red">手机号后6位</font></td>
+</tr>
+<tr>
+ <td align="center">
+    <input type="hidden" name="act" value="search" >
+	<input type="hidden" name="type" value="householder"> 
+    <a href="javascript:void(0);" onclick="javascript:AjaxSubmit('bind',true);"><div class="submit">提交绑定</div></a>
+ </td>
+</tr>
+</table>
+</form>
+ <div class="clear"></div>
+ {if !empty($keywords)}
+  <div style="padding:0 10px 10px;">
+  {if empty($res)} 
+    Sorry，没有找到 <span class="red">{$keywords}</span> 相关的单元房号！
+  {else}
+  <script type="text/javascript">
+   /* 绑定到小区 */
+   function setHouseholderBind(householder_id,house_number)
+   {
+      if(confirm("房号："+house_number+"，确认绑定到该单元房号？若已绑定过房号，该操作会解绑原来的房号，并重新绑定！"))
+	  {
+	     $.post("bind.html", {
+		 act:'act_householder', householder_id:householder_id },
+    function(data)
+    {
+	   var data = json_decode(data);
+	   if(data.error==0)
+	   {
+	     alertMsg(data.data);
+		 if(data.href)
+		 {
+		     setTimeout(function(){
+			 window.location.href=data.href},1500);
+		 }
+		 else
+		 {
+	         setTimeout("window.location.reload();",1500);
+	     }
+	   }
+	   if(data.error==1)
+	   {
+		 confirm(data.data);   
+	   }
+    });
+	  }   
+   }
+  </script>
+    请选择对应单元房号进行绑定：
+	<div class="clear height10"></div>
+  {foreach $res as $k=>$r}
+   <a href="javascript:void(0);" onclick="javascript:setHouseholderBind({$r.householder_id},'{$r.house_number}');">
+   <div class="srp" style="border:1px solid #ddd;{if $k>0}border-top:0{/if}">
+    <div class="titleContent">
+	  {$r.house_number}
+	</div>
+   </div>
+   </a>
+   {if count($res)==1}
+    <script type="text/javascript">
+	  var householder_id = {$r.householder_id};
+	  var house_number = '{$r.house_number}';
+	  setHouseholderBind(householder_id,house_number);
+	</script>
+  {/if}
+  {/foreach}
+  {include file="library/page.htm"}
+  {/if}
+  </div>
+ {/if}
+{/if}
+
+
+</div>
+</div>
+</div>
+
+{include file="library/page_footer.htm"}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>会员管理 - {:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="static/say.css" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="static/say.js"></script>
+  <script type="text/javascript" src="static/admin.js"></script>
+</head>
+<body>
+  <!-- INCLUDE _header.html -->
+  <div class="container">
+    <div class="dashboard ">
+      <!-- INCLUDE _admin_left_navigation.html -->    
+      <!-- INCLUDE _left_copyright.html -->
+    </div>
+    <div class="content">
+      <div class="content-header">
+        <div class="header-inner">
+          <h2>{:memberList.count} 位会员</h2>
+        </div>
+      </div>
+      <ol class="stream-items">
+        <!-- BEGIN memberList.list -->
+        <li class="stream-item">
+          <div class="stream-content">
+            <a href="user.php?id={:uid}" class="item-user"><img class="item-avatar" src="{:avatar}" alt="{:nickname}"><strong class="item-nickname">{:nickname}</strong></a>
+            <small class="time">{:regtime}</small>
+            <p class="item-message"><!-- IF email !="" --><a href="mailto:{:email}">{:email}</a><!-- ELSE -->&nbsp;<!-- ENDIF --></p>
+            <div class="stream-item-footer">
+              <div class="item-actions">
+                <a href="user.php?id={:uid}" target="_blank">新窗口</a>
+              </div>
+              <!-- IF groupid =="0" -->
+              <del>禁言</del>
+              <!-- ELSEIF groupid =="1" -->
+              会员
+              <!-- ELSEIF groupid =="2" -->
+              管理员
+              <!-- ELSEIF groupid =="3" -->
+              超级管理员
+              <!-- ENDIF -->
+              <!-- IF password !="" -->
+              <span class="point">•</span>
+              已设置密码
+              <!-- ENDIF -->
+              <!-- IF qqid !="" -->
+              <span class="point">•</span>
+              QQ用户
+              <!-- ENDIF -->
+            </div>
+          </div>
+        </li>
+        <!-- END -->
+      </ol>
+      <div class="stream-footer">
+        <div class="stream-end-inner">
+          <!-- IF memberList.page.Total > "1" -->
+            <!-- IF memberList.page.Prev != "" -->
+            <a href="{:memberList.page.Prefix}{:memberList.page.Prev}">上一页</a>
+            <!-- IF memberList.page.Next != "" -->
+            <span class="pagination">{:memberList.page.Current} / {:memberList.page.Total}</span>
+            <!-- ENDIF -->
+            <!-- ENDIF -->
+            <!-- IF memberList.page.Next != "" -->
+            <a href="{:memberList.page.Prefix}{:memberList.page.Next}">下一页</a>
+            <!-- ENDIF -->
+          <!-- ELSE -->
+            <span class="pagination"><!-- IF memberList.count > "0" -->已加载全部会员<!-- ELSE -->暂无提醒<!-- ENDIF --></span>
+          <!-- ENDIF -->
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="alert-messages">
+    <div class="message">
+      <span class="message-text"></span>
+    </div>
+  </div>
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title><!-- IF clubList.current.cid > "0" -->{:clubList.current.cname} - <!-- ENDIF -->{:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="static/say.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="static/uploadify.css" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="static/jquery.uploadify.min.js"></script>
+  <script type="text/javascript" src="static/jquery.flyout.js"></script>
+  <script type="text/javascript" src="static/say.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".stream-items .stream-item .stream-content").click(quickReply);
+  });
+  </script>  
+</head>
+<body>
+  <!-- INCLUDE _header.html -->
+  <div class="container">
+    <div class="dashboard ">
+      <!-- INCLUDE _left_profile.html -->
+      <!-- INCLUDE _left_club.html -->
+      <!-- INCLUDE _left_sponsor.html -->
+      <!-- INCLUDE _left_copyright.html -->
+    </div>
+    <!-- IF clubList.current.cid > "0" -->
+    <div class="addtopic">
+      <div class="content-header">
+        <div class="header-inner">
+          <h2>发篇新的</h2>
+        </div>
+      </div>
+      <div class="content-post">
+        <div class="post-inner">
+          <form id="topic-form">
+            <input type="hidden" name="cid" value="{:clubList.current.cid}">
+            <textarea class="input-body" name="message" rows="4"></textarea>
+            <div class="post-button-left">
+              <input type="file" name="picture" id="picture">
+            </div>
+            <div class="post-button-right">
+              <span class="text-counter">200</span>
+              <button class="submit-button" type="submit">
+                <span class="submit-button-text">发布</span>
+              </button>
+            </div>
+            <div class="clear"></div>
+          </form>
+          <script type="text/javascript">uploadify("topic");</script>
+        </div>
+      </div>
+    </div>
+    <!-- ENDIF -->
+    <div class="content">
+      <div class="content-header">
+        <div class="header-inner">
+          <h2><!-- IF clubList.current.cid > "0" -->{:clubList.current.cname}<!-- ELSE -->全部<!-- ENDIF --></h2>
+        </div>
+      </div>
+      <ol class="stream-items">
+        <!-- INCLUDE _stream_item.html -->
+      </ol>
+      <div class="stream-footer">
+        <div class="stream-end-inner">
+          <!-- IF topicList.page.Total > "1" -->
+            <!-- IF topicList.page.Prev != "" -->
+            <a href="{:topicList.page.Prefix}{:topicList.page.Prev}">上一页</a>
+            <!-- IF topicList.page.Next != "" -->
+            <span class="pagination">{:topicList.page.Current} / {:topicList.page.Total}</span>
+            <!-- ENDIF -->
+            <!-- ENDIF -->
+            <!-- IF topicList.page.Next != "" -->
+            <a href="{:topicList.page.Prefix}{:topicList.page.Next}">下一页</a>
+            <!-- ENDIF -->
+          <!-- ELSE -->
+            <span class="pagination"><!-- IF topicList.count > "0" -->已加载全部数据<!-- ELSE -->暂无数据<!-- ENDIF --></span>
+          <!-- ENDIF -->
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="alert-messages">
+    <div class="message">
+      <span class="message-text"></span>
+    </div>
+  </div>
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

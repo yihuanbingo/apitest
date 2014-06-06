@@ -1,0 +1,47 @@
+{include file="library/page_header.htm"}
+
+{if $notice_id==0}
+<!-- 公告列表 -->
+<div class="gheader">
+  <a href="notice.html"><div class="gtitle">最新通知</div></a>
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+ 
+  {foreach from=$log item=l}
+  <div style="padding:5px 5px 0px 5px">
+   <a href="notice.html?notice_id={$l.notice_id}">
+   <div style="width:100%;border-bottom:1px solid #ddd;padding: 0 0 0;">
+    <div style="line-height:20px;margin-top:5px">
+	  <p style="width:100%;float:left;font-size:18px;margin-top:0;padding:0 0 5px 0">{$l.title}</p>
+      
+      {if !empty($l.first_pic)}
+	   <p><img src="{$l.first_pic}" style="max-height:130px;"></p>
+	  {/if}
+       <p class="color999" style="line-height:150%;padding:20px 0 0 0;">{$l.content}</p>
+       <p style="text-align: right" class="color999">{$l.add_time}</p>
+	</div>
+	
+   </div>
+   </a>
+  </div>
+  {/foreach}
+ {include file="library/page.htm"}	
+ 
+ </div>
+</div>
+</div>
+ {include file="library/page_footer.htm"}
+{else}
+<!-- 公告详情 -->
+<div class="onepageview">
+ <h2>{$row.title}</h2>
+ <hr>
+ <div class="updatetime">{$row.add_time}</div>
+ <div class="content">
+  {$row.content}  
+ </div>
+{/if}

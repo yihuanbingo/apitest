@@ -1,0 +1,18 @@
+<div class="clear"></div>
+<div class="pagenav-wrapper">
+<div class="pagenav-content">   
+<div class="pagenav">       
+<div class="p-first {if !$pageF}p-gray{/if}"><a {if $pageF}href="{$pageF}"{/if}>首页</a></div>       
+<div class="p-prev {if !$pageP}p-gray{/if}"><a {if $pageP}href="{$pageP}"{/if}>上一页</a></div>       
+<div class="pagenav-cur"><div class="pagenav-text"> <span>{$pageNow}/{$pageAll}</span> <i></i></div>           
+<select class="pagenav-select" onchange="window.location.href=this.value">             
+{foreach from=$pageArr item=p}
+<option {if $p.num==$pageNow}selected{/if} value="{$p.uri}">第{$p.num}页</option>
+{/foreach}                                                                           
+</select>       
+</div>       
+<div class="p-next {if !$pageN}p-gray{/if}"><a {if $pageN}href="{$pageN}"{/if}>下一页</a></div>       
+<div class="p-end {if !$pageL}p-gray{/if}"><a {if $pageL}href="{$pageL}"{/if}>末页</a></div>   
+</div>
+</div>
+</div>

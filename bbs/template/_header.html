@@ -1,0 +1,34 @@
+<div class="header web-bg">
+  <div class="top-nav">
+    <ul class="left-nav">
+      <li>
+        <a<!-- IF headerNavi == "home" --> class="home"<!-- ENDIF --> title="主页" href="/"><span class="web-icon nav-home"></span>主页</a>
+      </li>
+      <li>
+        <a<!-- IF headerNavi == "at" --> class="home"<!-- ENDIF --> title="提醒" href="notification.php"><span class="web-icon nav-at"></span>提醒</a>
+      </li>
+      <li>
+        <a<!-- IF headerNavi == "me" --> class="home"<!-- ENDIF --> title="我" href="user.php"><span class="web-icon nav-me"></span>我</a>
+      </li>
+    </ul>
+    <div class="right-nav">
+      <div class="search">
+        <form method="get" action="search.php" onsubmit="return searchPHPSay();">
+          <input id="search-query" class="search-input" type="text" spellcheck="false" autocomplete="off" name="q" placeholder="搜索">
+          <span class="search-icon">
+            <button class="web-icon nav-search" type="submit" tabindex="-1"></button>
+          </span>
+          <input id="search-query-hint" class="search-input search-hinting-input" type="text" spellcheck="false" autocomplete="off" disabled="disabled">
+        </form>
+      </div>
+      <i class="web-icon topbar-divider"></i>
+      <div class="settings">
+        <a<!-- IF headerNavi == "settings" --> class="home"<!-- ENDIF --> title="设置" href="settings.php"><span class="web-icon nav-settings"></span></a>
+      </div>
+      <i class="web-icon topbar-divider"></i>
+      <div class="web-bg logout">
+        <a class="web-bg logout-btn" title="退出" onclick="location.href='connect.php'"><i class="nav-logout web-icon"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

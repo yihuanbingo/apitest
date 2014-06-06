@@ -1,0 +1,138 @@
+{include file="library/page_header.htm"}
+
+
+<div class="gheader">
+  <a href="askrepair.html"><div class="gtitle">报修申请</div></a>
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+
+<div class="cardexplain">
+ {if $act==default}
+	<ul class="round">
+	  <li>
+		<a href="askrepair.html?act=mine"  ><span>我的报修申请<em class="ok">{insert name=get_askrepair_mine}</em></span></a>
+	  </li>
+	</ul>
+
+	<ul class="round">
+	  <li>
+		<h2>报修说明</h2>
+	    <div class="text">
+		  您可以在这里输入您要报修的内容，我们会在第一时间进行处理，请保持手机畅通。若是紧急报修，请拨打紧急报修电话：{$phone}
+		</div>
+	  </li>
+	</ul>
+
+	<ul class="round">
+		<li class="tel"><a href="tel:{$phone}"><span>快捷拔号：{$phone}</span></a></li>
+	</ul>
+
+	<ul class="round">
+		<form action="askrepair.html" method="post" enctype="multipart/form-data" id="askrepair">
+		<li class="title mb"><span class="none">请认真填写表单</span></li>
+		<li class="nob">
+		<table width="100%" cellspacing="10px">
+		 <tr>
+		   <td><input type="text" name="name" placeholder="请输入姓名" style="border:1px solid #ccc;border-radius:5px;width:100%;height:30px;line-height:30px;text-indent:5px;font-size:16px;color:#666"></td>
+		 </tr>
+		 <tr>
+		   <td><input type="text" name="phone" placeholder="请输入联系电话" style="border:1px solid #ccc;border-radius:5px;width:100%;height:30px;line-height:30px;text-indent:5px;font-size:16px;color:#666"></td>
+		 </tr>
+		 <tr>
+		   <td>
+		    <textarea name="content" placeholder="请输入报修内容" style="width:100%;height:80px;border-radius:5px;border:1px solid #ccc;line-height:30px;text-indent:5px;font-size:16px;color:#666"></textarea>
+		   </td>
+		 </tr>
+		</table>
+		</li>
+		<input type="hidden" name="act" value="act_default">
+		</form>
+    </ul>
+	
+	<div class="footReturn">
+	<input id="showcard" class="submit" value="确认提交报修申请" type="button" onclick="javascript:AjaxSubmit('askrepair');"> 
+	</div>
+ {/if}
+ 
+ {if $act==mine}
+   <ul class="round asklistnav">
+	  <li style="width:42%;float:left;border:0;text-align:center;{if $status==0}background:#ccc{/if}">
+		<a href="askrepair.html?act=mine"  ><span>待受理</span></a>
+	  </li>
+	  <li style="width:42%;float:right;border:0;text-align:center;{if $status==1}background:#ccc{/if}">
+		<a href="askrepair.html?act=mine&status=1"  ><span>已完成</span></a>
+	  </li>
+	  <div class="clear"></div>
+	</ul>
+   
+   {if !empty($log)}
+	{foreach from=$log item=l}
+	<ul class="round">
+	  <li class="title">
+		<span>
+		  报修时间：{$l.add_time}
+		  <em class="no">{if $l.status==0}待受理{/if}{if $l.status==1}已处理{/if}{if $l.status==2}已撤销{/if}</em>
+		</span>	
+	  </li>
+	  <li>
+	   <div class="text">
+				<p>联系人：{$l.name}</p>				
+				<p>联系电话：{$l.phone}</p>								
+			    <p>报修内容：{$l.content}</p>
+                {if $l.reply!=""}<div class="color999"><p>物业反馈：{$l.reply}</p></div>{/if}
+				{if $status==0}							
+	             <div class="footReturn">
+				  <input  class="submit" value="撤销报修" type="button" onclick="javascript:cancelaskrepair({$l.ask_id});"/>
+  <script type="text/javascript">  
+   /* 撤销报修 */
+   function cancelaskrepair(ask_id)
+   {
+      if(confirm("撤销后，该报修将不会被处理，确认撤销报修？"))
+	  {
+	     $.post("askrepair.html", {
+		 act:'cancel', ask_id:ask_id },
+    function(data)
+    {
+	   var data = json_decode(data);
+	   if(data.error==0)
+	   {
+	     alertMsg(data.data);
+		 if(data.href)
+		 {
+		     setTimeout(function(){
+			 window.location.href=data.href},1500);
+		 }
+		 else
+		 {
+	         setTimeout("window.location.reload();",1500);
+	     }
+	   }
+	   if(data.error==1)
+	   {
+		 confirm(data.data);   
+	   }
+    });
+	  }   
+   }
+  </script>
+				 </div>
+	            {/if}
+	   </div>
+	  </li>
+    </ul>
+	{/foreach}
+	{include file="library/page.htm"}
+   {else}
+     <p style="text-align:center">没有符合条件的报修内容哦！</p>
+   {/if}
+ {/if}	
+</div>
+
+</div>
+</div>
+</div>
+{include file="library/page_footer.htm"}

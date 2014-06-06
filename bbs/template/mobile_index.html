@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, height=device-height, user-scalable=no" name="viewport">
+  <title>{:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
+  <link rel="apple-touch-icon" href="mobile_static/apple-touch-icon.png" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
+  <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.item-image img').click(imageZoom);
+    <!-- IF clubList.current.cid > "0" -->
+    $(".add-topic").click(function(){
+      $("#add-topic-form textarea[name=message]").focus();
+    });
+//    $("#add-topic-form textarea[name=message]").focusin(function(){
+//      $(this).attr("rows","6");
+//    }).focusout(function(){
+//      $(this).attr("rows","3");
+//    });
+    <!-- ENDIF -->
+  });
+  </script>
+</head>
+<body>
+  <!-- INCLUDE mobile_header.html -->
+  <div id="wrapper">
+    <div class="content">
+      <div class="box">
+        <div class="cell">
+          <div class="notification">
+          <!-- IF notificationNumber > "0" -->
+            <a href="notification.php" class="notify-highlight">{:notificationNumber} 条未读提醒</a>
+          <!-- ELSE -->
+            <span class="icon-notify"></span>
+            <a href="notification.php" class="notify">{:notificationNumber} 条未读提醒</a>
+          <!-- ENDIF -->
+          </div>
+          <!-- IF clubList.current.cid > "0" -->
+          <a class="add-topic">发布新消息</a>
+          <!-- ENDIF -->
+        </div>
+        <div class="cell">
+          <a class="tab<!-- IF clubList.current.cid == "0" --> current<!-- ENDIF -->" href="./">所有版块</a>
+          <!-- BEGIN clubList.list -->
+          <a class="tab<!-- IF top.clubList.current.cid == cid --> current<!-- ENDIF -->" href="./?cid={:cid}">{:cname}</a>
+          <!-- END -->
+        </div>
+        <!-- BEGIN topicList.list -->
+        <div class="cell">
+          <div class="item">
+            <div class="item-avatar">
+              <a href="user.php?id={:uid}"><img src="{:avatar}"></a>
+            </div>
+            <div class="item-nickname">
+              <a href="user.php?id={:uid}">{:nickname}</a> 
+			  <!-- IF groupid == "2" -->
+			   <span class="tag">小区管理员</span>
+			  <!-- ENDIF -->
+            </div>
+            <a href="t.php?id={:tid}">
+            <div class="item-message">
+              {:message}
+            </div>
+            </a>
+            <!-- IF smallimg != "" -->
+            <div class="item-image">
+              <img src="{:smallimg}" rel="{:bigimage}">
+            </div>
+            <!-- ENDIF -->
+            <div class="item-info">
+              <!-- IF clubname != "" -->
+              <a href="./?cid={:cid}">{:clubname}</a>
+              <span class="point">•</span>
+              <!-- ENDIF -->
+              <a href="t.php?id={:tid}">{:posttime}</a>
+              <span class="point">•</span>
+              <a href="t.php?id={:tid}" id="comment-{:tid}"><!-- IF comments > "0" --><strong>{:comments}</strong> <!-- ELSE -->暂无<!-- ENDIF -->回复</a>
+            </div>
+          </div>
+        </div>
+        <!-- END -->
+        <div class="inner">
+          <!-- IF topicList.page.Total > "1" -->
+            <!-- IF topicList.page.Prev != "" -->
+            <a href="{:topicList.page.Prefix}{:topicList.page.Prev}" class="page prev">上一页</a>
+            <!-- ENDIF -->
+            <!-- IF topicList.page.Next != "" -->
+            <a href="{:topicList.page.Prefix}{:topicList.page.Next}" class="page next">下一页</a>
+            <!-- ENDIF -->
+            <strong>{:topicList.page.Current} / {:topicList.page.Total}</strong>
+          <!-- ELSE -->
+            <strong><!-- IF topicList.count > "0" -->已加载全部数据<!-- ELSE -->暂无数据<!-- ENDIF --></strong>
+          <!-- ENDIF -->
+        </div>
+      </div>
+      <!-- IF clubList.current.cid > "0" -->
+      <div class="sep5"></div>
+      <div class="box">
+        <div class="cell" id="post-header">
+          <div class="navigation">发篇新的</div>
+        </div>
+        <div class="inner" id="post-form">
+          <form action="post.php" method="post" id="add-topic-form" enctype="multipart/form-data">
+		    <div class="post-button-left">
+              <input type="file" name="picture" id="picture">
+            </div>
+            <div class="input-body">
+              <textarea maxlength="200" name="message" rows="5"></textarea>
+            </div>
+			<input type="hidden" name="do" value="addTopic">
+            <input type="hidden" name="cid" value="{:clubList.current.cid}">
+            <input class="submit-button" type="button" value="提交发布" onClick="javascript:postTopic();">
+          </form>
+        </div>
+      </div>
+      <!-- ENDIF -->
+    </div>
+  </div>
+  <!-- INCLUDE mobile_footer.html -->
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>{:topicInfo.nickname}发布的微文 - {:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="static/say.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="static/uploadify.css" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="static/jquery.uploadify.min.js"></script>
+  <script type="text/javascript" src="static/jquery.flyout.js"></script>
+  <script type="text/javascript" src="static/jquery.focus.js"></script>
+  <script type="text/javascript" src="static/say.js"></script>
+</head>
+<body>
+  <!-- INCLUDE _header.html -->
+  <div class="container">
+    <div class="dashboard ">
+      <!-- INCLUDE _left_profile.html -->
+      <!-- INCLUDE _left_club.html -->
+      <!-- INCLUDE _left_copyright.html -->
+    </div>
+    <div class="content">
+      <div class="content-header">
+        <div class="header-inner">
+          <div class="topic-content">
+            <div class="topic-user">
+              <a href="user.php?id={:topicInfo.uid}">
+                <img src="{:topicInfo.avatar}" class="avatar">
+                <strong class="nickname">{:topicInfo.nickname}</strong>
+              </a>
+            </div>
+            <p class="topic-message">{:topicInfo.message}</p>
+            <!-- IF topicInfo.smallimg != "" -->
+            <div class="topic-picture">
+              <a href="{:topicInfo.bigimage}" class="zoom"><img src="{:topicInfo.smallimg}" alt="" title=""></a>
+            </div>
+            <!-- ENDIF -->
+            <div class="topic-actions">
+              <a onclick="replyAt('{:topicInfo.nickname}');"><span class="web-icon icon-reply"></span>回复</a>
+              <!-- IF loginInfo.group > "1" -->
+                <a onclick="deleteTopic({:topicInfo.tid},{:topicInfo.cid});" id="deleteTopic-{:topicInfo.tid}"><span class="web-icon icon-trash"></span>删除</a>
+                <a onclick="sinkTopic({:topicInfo.tid});" id="sinkTopic-{:topicInfo.tid}"><span class="web-icon icon-sink"></span><!-- IF topicInfo.lasttime > "0" -->下沉<!-- ELSE -->恢复<!-- ENDIF --></a>
+              <!-- ENDIF -->
+              <!-- IF favoriteId != "" -->
+                <a onclick="unFavTopic({:topicInfo.tid});" id="favTopic-{:topicInfo.tid}" class="favorite"><span class="web-icon icon-fav"></span>已收藏</a>
+              <!-- ELSE -->
+                <a onclick="favTopic({:topicInfo.tid});" id="favTopic-{:topicInfo.tid}"><span class="web-icon icon-fav"></span>收藏</a>
+              <!-- ENDIF -->
+            </div>
+            <div class="topic-time">
+              {:topicInfo.posttime}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reply-form">
+        <div class="reply-inner">
+          <form id="reply-form">
+            <input type="hidden" name="tid" value="{:topicInfo.tid}">
+            <textarea class="input-body" name="message" rows="3"></textarea>
+            <div class="post-button-left">
+              <input type="file" name="picture" id="picture">
+            </div>
+            <div class="post-button-right">
+              <span class="text-counter">200</span>
+              <button class="submit-button" type="submit">
+                <span class="submit-button-text">回复</span>
+              </button>
+            </div>
+            <div class="clear"></div>
+          </form>
+          <script type="text/javascript">uploadify("reply");</script>
+        </div>
+      </div>
+      <ol class="reply-items">
+        <!-- INCLUDE _reply_item.html -->
+      </ol>      
+      <div class="topic-footer">
+        <div class="topic-end-inner">
+          <!-- IF replyList.page.Total > "1" -->
+            <!-- IF replyList.page.Prev != "" -->
+            <a href="{:replyList.page.Prefix}{:replyList.page.Prev}">上一页</a>
+            <!-- IF replyList.page.Next != "" -->
+            <span class="pagination">{:replyList.page.Current} / {:replyList.page.Total}</span>
+            <!-- ENDIF -->
+            <!-- ENDIF -->
+            <!-- IF replyList.page.Next != "" -->
+            <a href="{:replyList.page.Prefix}{:replyList.page.Next}">下一页</a>
+            <!-- ENDIF -->
+          <!-- ELSE -->
+            <span class="pagination"><!-- IF replyList.count > "0" -->已加载全部回复<!-- ELSE -->暂无回复<!-- ENDIF --></span>
+          <!-- ENDIF -->
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="alert-messages">
+    <div class="message">
+      <span class="message-text"></span>
+    </div>
+  </div>
+  <script type="text/javascript">locationHash();</script>
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

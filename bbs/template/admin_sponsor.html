@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>广告管理 - {:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="static/say.css" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="static/say.js"></script>
+  <script type="text/javascript" src="static/admin.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#sponsorSetting input").keyup(checkSponsorInput);
+    $("#sponsorSetting").submit(addSponsor);
+    $(".sponsor-items li span").click(deleteSponsor);
+  });
+  </script>
+</head>
+<body>
+  <!-- INCLUDE _header.html -->
+  <div class="container">
+    <div class="dashboard ">
+      <!-- INCLUDE _admin_left_navigation.html -->
+      <div class="sponsor-list">
+        <div class="sponsor-inner">
+          <div class="sponsor-module-header">
+            <h3>广告</h3>
+          </div>
+          <ul class="sponsor-items">
+            <!-- BEGIN sponsorList -->
+            <li>
+              <a href="{:url}" target="{:target}">{:text}</a>
+              <span class="web-icon trash" data="{:ROWCNT}"></span>
+            </li>
+            <!-- END -->
+          </ul>
+        </div>
+      </div>
+      <!-- INCLUDE _left_copyright.html -->
+    </div>
+    <div class="content">
+      <form id="sponsorSetting" name="sponsorSetting" method="post">
+        <div class="content-header">
+          <div class="header-inner"><h2>添加广告</h2></div>
+        </div>
+        <div class="setting-profile">
+          <div class="setting-inner">
+            <fieldset class="control-group">
+              <label class="control-label" for="linkText">链接文字</label>
+              <div class="controls">
+                <input type="text" name="linkText" id="linkText" maxlength="21" autocomplete="off">
+              </div>
+            </fieldset>
+            <fieldset class="control-group">
+              <label class="control-label" for="linkURL">链接地址</label>
+              <div class="controls">
+                <input type="text" name="linkURL" id="linkURL" maxlength="300" autocomplete="off">
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="setting-footer">
+          <div class="setting-end-inner">
+            <button type="submit" class="setting-button" disabled="disabled">保存添加</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="alert-messages">
+    <div class="message">
+      <span class="message-text"></span>
+    </div>
+  </div>
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

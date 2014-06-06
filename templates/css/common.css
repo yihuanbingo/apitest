@@ -1,0 +1,327 @@
+/* CSS Document */
+html, body{font-size:13px;font-family:microsoft yahei;color:#333;}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td{margin:0;padding:0}
+input {margin:0;padding:0;outline:medium;}
+select {padding:4px;border-style:solid;border-width:1px;border-color:#aaa #ddd #ddd #aaa;color:#333}
+select.normal {padding:0;}
+li{ list-style-type:none;float:left}
+
+.float_l {float:left}
+.float_r {float:right}
+.red {color:red}
+.blue {color:#1155cc}
+.green {color:#5aab4d }
+.color999 {color:#999}
+.hrefColor {color:#004477}
+
+/* 清除浮动 */
+.clear{clear:both;height:0;overflow:hidden}
+/* 高度 */
+.fontSize12 {font-size:12px}
+.height5 {height:5px}
+.height10{height:10px;}
+.height20{height:20px;}
+.height30{height:30px;}
+a {color:#333;cursor:pointer;text-decoration:none}
+a:visited {color:#333}
+img,button {border:0;}
+
+/* 分类页 */
+.pagenav-wrapper .pagenav-content{padding:10px 0;text-align:center;line-height:28px;}
+.pagenav-wrapper .pagenav{display:-webkit-box;display:flex}
+.pagenav-wrapper .pagenav>div{background-color:#fff;border:1px solid #ccc;line-height:29px;white-space:nowrap;border-radius:2px;cursor:pointer}
+.pagenav .p-first,.pagenav .p-end{width:42px;font-size:12px}
+.pagenav .p-prev,.pagenav .p-next{width:59px;margin:0 5px;font-size:12px}
+.pagenav .pagenav-cur{-webkit-box-flex:1;flex:1;position:relative;box-shadow:0 3px 3px #d7d7d7 inset;background:#fff}
+.pagenav .pagenav-select{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;opacity:0;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;border:0;border-radius:0;cursor:pointer}
+.pagenav .pagenav-cur i{display:inline-block;width:10px;height:7px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAATFJREFUeNqEkjGLg0AQhXWz+BNsjKVgZSsSEKIQ/7TaRAtBG4MSSBuxE2xSiJJ7dwPDkvO4Vyy7s/PNmx3V3j9q27Yoivd/Wtc1TdNxHOkoNU273W51XWMjhAiCQPtDIPM8H4YB8OVyMU1ThydIlNF1HRmu6+7yTNLRMIwkScQ8z0xic7/fq6r6ILdtA/l8PjmyLAv6lafTCYfH48EXfd9j9X2fySzL4EkGJMuywjAUCIF3HAe2ZA51Xdc0DXtStzw2kFEUHQ4HnRjoer2SP8pR0PO8aZrQLT8KG5BxHIP8zmQYwtcinoJURV1t2yZPyhfqYLh/tlLX4/GokpBUYXq/Oj+uAs/z+aySn22TECnLEjxfESml/MgUv/8Hnj/Zottdct9Znd/r9cI7d0noS4ABAOHCAbGUYIj4AAAAAElFTkSuQmCC);background-size:10px 7px}
+.pagenav-wrapper .pagenav .p-gray{background-color:#fdfdfd;}
+.pagenav-wrapper .pagenav .p-gray a{color:#b4b1b1}
+.pagenav a:hover{text-decoration:none}
+
+/* 返回顶部 */
+.footer{
+border: 0px solid #D1D1D1;
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+background-color: #FFFFFF;
+margin: 10px;
+padding: 15px;
+text-align: center;
+cursor: pointer;
+display: block;
+}
+.footer .top
+{
+background: url(../images/goUp.png) no-repeat scroll left center transparent;
+background-size: 11px auto;
+display: block;
+margin: 0 auto;
+text-indent: 15px;
+width: 85px;
+}
+
+.gheader{
+height:45px;font-size:18px;padding-left:10px;background:#53a046;color:#fff;
+}
+.gheader .gtitle{
+height:25px;margin-top:10px;line-height:25px;float:left;color:#fff
+}
+.gcontent {
+background:#e4e4e4;
+}
+.gcontent .gbox{
+margin:0 auto;padding:5px
+}
+.gcontent .gbox .gmain{
+background:#fff;border:1px solid #ddd;border-radius:3px;
+}
+.gfooter{
+padding:5px;color:#999
+}
+
+/* 底部版权信息 */
+footer{
+position: relative;
+text-align: center;
+color: #ffd800;
+margin-top: 10px;
+height: 35px;
+line-height: 35px;
+overflow: hidden;
+z-index: 10;
+border-top: 1px solid #c9c9c9;
+background: #e2e2e2;
+}
+footer a{
+color: #000!important;
+font-size: 12px;
+}
+
+/* 资讯列表页样式 */
+.srp {
+width:100%;
+background:#F9F9F9;
+border-bottom:1px solid #ddd;
+box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+-moz-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+-webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset;
+padding:0 20px 0 20px;
+box-sizing: border-box;
+}
+.srp .titleContent {
+width:100%;
+padding-right:10px;
+box-sizing:border-box;
+height:50px;
+line-height:50px;
+font-size:18px;
+background:url(/templates/images/ico-next.png) right center no-repeat;
+background-size:9px auto;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.srp .left{
+width:15%;float:left;height:100%;
+}
+.srp .left img{
+float:right;margin-top:5px;border-radius:5px;
+}
+.srp .middle{
+width:60%;float:left;height:100%;padding:0 10px;text-overflow:ellipsis;overflow:hidden
+}
+.srp .right{
+width:16%;float:left;height:100%;text-align:center
+}
+.srp .right img {
+margin-top:18px
+}
+
+/* 公告列表 */
+.weimob-page {
+min-height: 100%;
+-webkit-box-sizing: border-box;
+word-wrap: break-word;
+position: relative;
+}
+.weimob-list-sau {
+position: absolute;
+width: 12%;
+float: left;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 10px;
+background-image: -webkit-gradient(linear, left top, left bottom, from( #999), to( #000 ));
+background-image: -webkit-linear-gradient( #999 , #000);
+background-image: -moz-linear-gradient( #999 , #000 );
+background-image: -ms-linear-gradient( #999 , #000);
+background-image: -o-linear-gradient( #999 , #000);
+background-image: linear-gradient( #999 , #000);
+color: #FFF;
+padding: 5px;
+}
+.weimob-list-sau .mday{
+display: block;
+color: #fff;
+text-align: center;
+}
+.weimob-list-sau .years{
+display: block;
+color: #fff;
+font-size:0.8rem;
+text-align: center;
+}
+.weimob-list-item {
+width: 78%;
+border-radius: 15px;
+float: right;
+border: 1px solid #f5f5f5;
+box-shadow: 1px 2px 3px #666;
+display: inline-block;
+position: relative;
+height: 70%;
+overflow: hidden;
+background: none;
+border-bottom: 1px solid #ccc;
+padding-bottom: 10px;
+margin: 0 1%;
+padding: 2%;
+}
+.weimob-list-item .weimob-list-item-line {
+padding-left: 10px!important;
+padding-right: 10px;
+display: table-cell;
+height: inherit;
+background-position: center;
+background-repeat: no-repeat;
+vertical-align: middle;
+width:70%;
+}
+.weimob-list-item .weimob-list-item-line .weimob-list-item-title {
+white-space: normal!important;
+height: 27px;
+line-height: 27px;
+overflow: hidden;
+padding-right: 50px;
+-webkit-box-sizing: border-box;
+color: #000000;
+font-size: 16px;
+zoom: 1;
+}
+.weimob-list-item .weimob-list-item-line .weimob-list-item-summary {
+font-size: 0.8rem;
+color: #333;
+line-height:18px;
+margin-top: 3px;
+}
+.weimob-list-item .weimob-list-more {
+height: 30px;
+width: 100%;
+margin-top: 10px;
+}
+.weimob-list-item .weimob-list-more .weimob-list-item-more {
+line-height: 30px;
+color: #000;
+font-size: 1.2rem;
+height: 30px;
+width: 90%;
+display: inline-block;
+}
+
+/* 资讯详情 */
+.onepageview{
+padding:20px 10px 0;
+}
+.onepageview h2{
+color: #555;
+text-align: left;
+font-weight: bold;
+font-size: 20px;
+}
+.onepageview hr{
+margin:7px 0;
+font-size:14px;
+}
+.onepageview .updatetime{
+font-size: 12px;
+color: #999;
+}
+.onepageview .content{
+padding: 10px 0;
+line-height: 180%;
+}
+.onepageview .content img{
+max-width:100%;
+}
+
+/*************** 模拟js弹出层 **************/
+#popDiv {
+background-color: rgba(51, 51, 51, 0.9);
+border-radius: 5px;
+padding: 15px;
+color:#fff;
+-webkit-transition: opacity 0.3s linear;
+transition: opacity 0.3s linear;
+z-index:99;
+width: 220px;
+height: 20px;
+left:50%;/*FF IE7*/
+top: 50%;/*FF IE7*/
+margin-left:-125px!important;/*FF IE7 该值为本身宽的一半 */
+margin-top:-25px!important;/*FF IE7 该值为本身高的一半*/
+margin-top:0px;
+position:fixed!important;/*FF IE7*/
+position:absolute;/*IE6*/
+_top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+
+}
+.bg {
+background-color:#ccc;
+width: 100%;
+height: 100%;
+left:0;
+top:0;/*FF IE7*/
+filter:alpha(opacity=20);/*IE*/
+opacity:0.2;/*FF*/
+z-index:1;
+position:fixed!important;/*FF IE7*/
+position:absolute;/*IE6*/
+_top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+
+}
+/***************** 模拟js弹出层 end *******************/

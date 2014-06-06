@@ -1,0 +1,198 @@
+{include file="library/page_header.htm"}
+
+
+
+<div class="gheader">
+  <a href="myproperty.html"><div class="gtitle">我的物业</div></a> 
+  <div class="float_l" style="font-size:14px;line-height:45px">  - 
+  {if $act==default}{$house_number}
+			{elseif $act==property}物业费
+			{elseif $act==express}代收快递
+			{elseif $act==park}停车费
+			{/if}
+  </div>			
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+{if $act==default}
+<div style="padding:10px;">
+   <a href="myproperty.html?act=property">
+   <div class="srp" style="border:1px solid #ddd;">
+    <div class="titleContent">
+	  物业费查询
+	</div>
+   </div>
+   </a>
+   
+   <a href="myproperty.html?act=express">
+   <div class="srp" style="border:1px solid #ddd;border-top:0">
+    <div class="titleContent">
+	  代收快递
+	</div>
+   </div>
+   </a>
+   <a href="myproperty.html?act=park">
+   <div class="srp" style="border:1px solid #ddd;border-top:0">
+    <div class="titleContent">
+	  停车费查询
+	</div>
+   </div>
+   </a>
+   <div class="clear height10"></div>
+   <a href="bind.html?act=householder&redirectUrl=myproperty.html"><div class="submit">重新绑定物业</div></a>
+</div>
+{/if}
+
+{if $act==express}
+ <!--代收快递-->
+ <form style="margin:10px auto 0;" action="myproperty.html" method="post" enctype="multipart/form-data" id="myproperty">
+<table width="100%" cellspacing="10px">
+<tr>
+ <td class="input"><input type="text" name="phone" class="input" style="border:0" placeholder="请输入收件人电话进行搜索" value="{$phone}"></td>
+<tr>
+ <td align="center">
+    <input type="hidden" name="act" value="search" >
+    <a href="javascript:void(0);" onclick="javascript:AjaxSubmit('myproperty',true);"><div class="submit">搜索快递</div></a>
+ </td>
+</tr>
+</table>
+</form>
+
+  {if !empty($phone)}
+   <div class="cardexplain">
+    {if !empty($log)}
+	{foreach from=$log item=l}
+	<ul class="round">
+	  <li class="title">
+		<span>
+		  代收时间：{$l.update_time}
+		  <em class="no">{if $l.status==0}待领取{/if}{if $l.status==1}已领取{/if}</em>
+		</span>	
+	  </li>
+	  <li>
+	   <div class="text">
+				<p>联系人：{$l.name}</p>				
+				<p>联系电话：{$l.phone}</p>								
+			    <p>快递公司：{$l.express_name}</p>
+				<p>快递单号：{$l.express_sn}</p>
+				{if $l.status==0}							
+	             <div class="footReturn">
+				 <input  class="submit" value="设为已领取" type="button" onclick="javascript:setExpressReceived({$l.log_id});"/>
+  <script type="text/javascript">  
+   /* 撤销报修 */
+   function setExpressReceived(log_id)
+   {
+      if(confirm("确认将该快递设为已领取吗？"))
+	  {
+	     $.post("myproperty.html", {
+		 act:'setExpressReceived', log_id:log_id },
+    function(data)
+    {
+	   var data = json_decode(data);
+	   if(data.error==0)
+	   {
+	     alertMsg(data.data);
+		 if(data.href)
+		 {
+		     setTimeout(function(){
+			 window.location.href=data.href},1500);
+		 }
+		 else
+		 {
+	         setTimeout("window.location.reload();",1500);
+	     }
+	   }
+	   if(data.error==1)
+	   {
+		 confirm(data.data);   
+	   }
+    });
+	  }   
+   }
+  </script>
+				 </div>
+	            {/if}
+	   </div>
+	  </li>
+    </ul>
+	{/foreach}
+	{include file="library/page.htm"}
+   {else}
+     <p style="text-align:center">没有找到 <font class="red">{$phone}</font> 相关的代收快递哦！</p>
+   {/if}
+  </div>
+  {/if}
+{/if}
+
+  <style type="text/css">
+   table.property td{
+   height: 35px;
+   line-height:35px;
+   padding-left: 10px;
+   font-size:16px;
+   }
+  </style>
+
+{if $act==property}
+ <div class="cardexplain">
+  {if !empty($row.log_id)}
+  <table cellspacing="1" cellpadding="10" width="100%" bgcolor="#ffffff" class="property">
+   <tr bgcolor="#ddeef2">
+    <td>单元房号：</td><td colspan="2">{$house_number}</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td>物业费状态：</td><td colspan="2">{if $row.status==0}<font class="red">欠费</font>{else}<font class="green">正常</font>{/if}</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td>已交至：</td><td colspan="2">{$row.pay_late}</td>
+   </tr>
+   {if $row.status==0}
+   <tr bgcolor="#ddeef2">
+	<td>欠费月数</td><td>每月应缴</td><td>欠费总额</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td><font class="red">{$row.arrearage_months}</font> 个月</td><td>¥ {$row.pay_month}</td><td><span class="red">¥ {$row.arrearage}</span></td>
+   </tr>
+   {/if}
+  </table>
+  {else}
+   <p style="text-align:center">单元房号为 <font class="red">{$house_number}</font> 的物业费信息还没有更新哦！</p>
+  {/if}
+ </div>
+{/if}
+
+{if $act==park}
+  <div class="cardexplain">
+  {if !empty($row.log_id)}
+  <table cellspacing="1" cellpadding="10" width="100%" bgcolor="#ffffff" class="property">
+   <tr bgcolor="#ddeef2">
+    <td>单元房号：</td><td colspan="2">{$house_number}</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td>停车费状态：</td><td colspan="2">{if $row.status==0}<font class="red">欠费</font>{else}<font class="green">正常</font>{/if}</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td>已交至：</td><td colspan="2">{$row.pay_late}</td>
+   </tr>
+   {if $row.status==0}
+   <tr bgcolor="#ddeef2">
+	<td>欠费月数</td><td>每月应缴</td><td>欠费总额</td>
+   </tr>
+   <tr bgcolor="#ddeef2">
+	<td><font class="red">{$row.arrearage_months}</font> 个月</td><td>¥ {$row.pay_month}</td><td><span class="red">¥ {$row.arrearage}</span></td>
+   </tr>
+   {/if}
+  </table>
+  {else}
+   <p style="text-align:center">没有找到单元房号为 <font class="red">{$house_number}</font> 的停车费信息哦！</p>
+  {/if}
+ </div>
+{/if}
+
+</div>
+</div>
+</div>
+{include file="library/page_footer.htm"}

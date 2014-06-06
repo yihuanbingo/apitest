@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, height=device-height, user-scalable=no" name="viewport">
+  <title>{:PHPSayConfig.sitename}</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
+  <script type="text/javascript" src="static/jquery.js"></script>
+  <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
+  <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.item-image img').click(imageZoom);
+   // $("#reply-topic-form").submit(replyTopic);
+//    $("#reply-topic-form textarea[name=message]").focusin(function(){
+//      $(this).attr("rows","6");
+//    }).focusout(function(){
+//      $(this).attr("rows","3");
+//    });
+    $(".favorite").click(favoriteMsg);
+    $(".favorited").click(unFavoriteMsg);
+    <!-- IF loginInfo.group < "2" -->
+    $(".reply").css({"right":"30px"}).fadeIn();
+    $(".favorite").css({"right":"0"}).fadeIn();
+    $(".favorited").css({"right":"0"}).fadeIn();
+    <!-- ELSE -->
+    $(".reply").fadeIn();
+    $(".favorite").fadeIn();
+    $(".favorited").fadeIn();
+    <!-- ENDIF -->
+    locationHash();
+  });
+  </script>
+</head>
+<body>
+  <!-- INCLUDE mobile_header.html -->
+  <div id="wrapper">
+    <div class="content">
+      <div class="box">
+        <div class="cell">
+          <div class="navigation">
+            <a href="./">首页</a>
+            <span class="chevron">›</span>
+            <a href="./?cid={:topicInfo.cid}">{:topicInfo.clubname}</a>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="item">
+            <div class="item-avatar">
+              <a href="user.php?id={:topicInfo.uid}"><img src="{:topicInfo.avatar}"></a>
+            </div>
+            <div class="item-nickname">
+              <a href="user.php?id={:topicInfo.uid}">
+			  {:topicInfo.nickname}
+			  <!-- IF topicInfo.groupid == "2" -->
+			    <span class="tag">小区管理员</span>
+			   <!-- ENDIF -->
+			  </a>
+            </div>
+            <div class="item-message">
+              {:topicInfo.message}
+            </div>
+            <!-- IF topicInfo.smallimg != "" -->
+            <div class="item-image">
+              <img src="{:topicInfo.smallimg}" rel="{:topicInfo.bigimage}">
+            </div>
+            <!-- ENDIF -->
+            <div class="item-info">
+              <span class="time">{:topicInfo.posttime}</span>
+              <a onClick="replyAt('{:topicInfo.nickname}');" class="reply hidden">回复</a>
+              <a class="favorite<!-- IF favoriteId != "" -->d<!-- ENDIF --> hidden" data="topic-{:topicInfo.tid}">收藏</a>
+              <!-- IF loginInfo.group > "1" -->
+                <a onClick="deleteTopic({:topicInfo.tid},{:topicInfo.cid});" class="delete">删除</a>
+              <!-- ENDIF -->              
+            </div>
+          </div>
+        </div>
+        <div class="inner" id="reply-topic">
+          <form action="post.php" method="post" id="reply-topic-form" enctype="multipart/form-data">
+            <div class="post-button-left">
+              <input type="file" name="picture" id="picture">
+            </div>
+			<div class="input-body">
+              <textarea maxlength="200" name="message" rows="5"></textarea>
+            </div>
+			<input type="hidden" name="do" value="replyTopic">
+            <input type="hidden" name="tid" value="{:topicInfo.tid}">
+            <input class="submit-button" type="button" value="发表回复" onClick="javascript:replyTopic();">
+          </form>
+        </div>
+      </div>
+      <div class="sep5"></div>
+      <div class="box">
+        <!-- BEGIN replyList.list -->
+        <div class="cell" id="reply-{:pid}">
+          <div class="item">
+            <div class="item-avatar">
+              <a href="user.php?id={:uid}"><img src="{:avatar}"></a>
+            </div>
+            <div class="item-nickname">
+              <a href="user.php?id={:uid}">{:nickname} 
+			   <!-- IF groupid == "2" -->
+			    <span class="tag">小区管理员</span>
+			   <!-- ENDIF -->
+			  </a>
+            </div>
+            <div class="item-message">
+              {:message}
+            </div>
+            <!-- IF smallimg != "" -->
+            <div class="item-image">
+              <img src="{:smallimg}" rel="{:bigimage}">
+            </div>
+            <!-- ENDIF -->
+            <div class="item-info">
+              <span class="time">{:posttime}</span>
+              <a onClick="replyAt('{:nickname}');" class="reply hidden">回复</a>
+              <a class="favorite hidden" data="reply-{:pid}">收藏</a>
+              <!-- IF top.loginInfo.group > "1" -->
+                <a onClick="deleteReply({:pid});" class="delete">删除</a>
+              <!-- ENDIF -->
+            </div>
+          </div>
+        </div>
+        <!-- END -->
+        <div class="inner">
+          <!-- IF replyList.page.Total > "1" -->
+            <!-- IF replyList.page.Prev != "" -->
+            <a href="{:replyList.page.Prefix}{:replyList.page.Prev}" class="page prev">上一页</a>
+            <!-- ENDIF -->
+            <!-- IF replyList.page.Next != "" -->
+            <a href="{:replyList.page.Prefix}{:replyList.page.Next}" class="page next">下一页</a>
+            <!-- ENDIF -->
+            <strong>{:replyList.page.Current} / {:replyList.page.Total}</strong>
+          <!-- ELSE -->
+            <strong><!-- IF replyList.count > "0" -->已加载全部回复<!-- ELSE -->暂无回复<!-- ENDIF --></strong>
+          <!-- ENDIF -->
+        </div>        
+      </div>
+    </div>
+  </div>
+  <!-- INCLUDE mobile_footer.html -->
+  <!-- INCLUDE _analytics.html -->
+</body>
+</html>

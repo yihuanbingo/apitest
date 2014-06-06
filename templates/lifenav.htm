@@ -1,0 +1,47 @@
+{include file="library/page_header.htm"}
+
+<div class="gheader">
+  <a href="lifenav.html"><div class="gtitle">生活百事通</div></a>
+  {if !empty($lifenav_cat_name)}
+   <div class="float_l" style="font-size:14px;line-height:45px">&ensp;- {$lifenav_cat_name}</div>
+  {/if} 
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+{if $lifenav_cat_id==0}
+ {foreach from=$list item=l}
+   <div style="font-size:18px;padding:5px 5px 0;">{$l.cat_name}</div>
+   {foreach from=$l.sub_cat item=sc}
+    <div style="width:33%;float:left;">
+	  <div style="width:95%;margin:5px auto;">
+	   <a href="lifenav.html?lifenav_cat_id={$sc.cat_id}">
+	     <img src="/templates/images/lifenav/{$sc.cat_id}.jpg" width="100%" >
+	   </a> 
+	  </div>
+	</div>
+   {/foreach}
+   <div class="clear"></div>
+ {/foreach}
+{else}
+ {foreach from=$list item=l}
+   <div style="border-bottom:1px solid #ddd;padding:5px;line-height:150%;font-size:15px">
+   {foreach $l.content as $k=>$v}
+     <span class="color999 float_l" style="width:28%">{$k}：</span>
+	 <span class="float_l" style="width:72%">{if strstr($k,'电话')}<a href="tel:{$v}" class="blue">{$v}</a>{else}{$v}{/if}</span>
+	 <div class="clear"></div>
+   {/foreach} 
+   </div>
+ {/foreach}
+ <div style="padding:0 5px">
+  {include file="library/page.htm"}	
+ </div>
+{/if}
+
+</div>
+</div>
+</div>
+</div>
+{include file="library/page_footer.htm"}

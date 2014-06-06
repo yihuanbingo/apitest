@@ -1,0 +1,39 @@
+{include file="library/page_header.htm"}
+
+<div class="gheader">
+  <div class="gtitle">操作提示</div>
+</div>
+
+<div class="gcontent">
+<div class="gbox">
+<div class="gmain">
+
+<div class="cardexplain">
+{if $bind==community}
+<div class="clear height10"></div>
+亲，您还未绑定小区哦，请先绑定小区！
+<div class="clear height10"></div>
+<a href="bind.html?redirectUrl={$redirectUrl}"><div class="submit">立即绑定小区</div></a>
+{/if}
+
+{if $bind==householder}
+<div class="clear height10"></div>
+亲，您还未绑定物业哦，请先绑定物业！
+<div class="clear height10"></div>
+<a href="bind.html?act=householder&redirectUrl={$redirectUrl}"><div class="submit">立即绑定物业</div></a>
+{/if}
+
+{if $bind==notExistshouseholder}
+<div class="clear height10"></div>
+Sorry，您所在小区还没有提供<span class="red">物管费、停车费、包裹快递</span>等物业信息的查询！
+<div class="clear height5"></div>
+请联系您的小区物业进行开通，谢谢！
+<div class="clear height10"></div>
+<a href="bbs/?openid={$openid}"><div class="submit">去小区论坛逛逛</div></a>
+{/if}
+</div>
+
+</div>
+</div>
+</div>
+{include file="library/page_footer.htm"}
