@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-05-30 11:23:28
+<?php /* Smarty version Smarty-3.1.7, created on 2014-06-06 12:43:30
          compiled from "./templates/info.html" */ ?>
 <?php /*%%SmartyHeaderCode:12117194335387f6eaab6959-64342616%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aa59ea88bdc58fe19421f98e3c8e87d97cc53347' => 
     array (
       0 => './templates/info.html',
-      1 => 1401420205,
+      1 => 1402029808,
       2 => 'file',
     ),
   ),
@@ -45,23 +45,27 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 foreach ($_from as $_smarty_tpl->tpl_vars['l']->key => $_smarty_tpl->tpl_vars['l']->value){
 $_smarty_tpl->tpl_vars['l']->_loop = true;
 ?>
+  <div style="padding:5px 5px 0px 5px">
    <a href="info.html?info_id=<?php echo $_smarty_tpl->tpl_vars['l']->value['info_id'];?>
 ">
-   <div style="width:100%;border-bottom:1px solid #ddd;padding: 0 0 10px;">
-    <div style="height:40px;line-height:40px">
-	  <span style="display:block;width:65%;float:left;font-size:18px;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;"><?php echo $_smarty_tpl->tpl_vars['l']->value['title'];?>
-</span>
-	  <span style="display:block;float:right;" class="color999"><?php echo $_smarty_tpl->tpl_vars['l']->value['add_time'];?>
-</span>
-	</div>
-	<?php if (!empty($_smarty_tpl->tpl_vars['l']->value['first_pic'])){?>
-		   <p><img src="<?php echo $_smarty_tpl->tpl_vars['l']->value['first_pic'];?>
-" style="max-height:130px;"></p>
-	<?php }?>
-	<p class="color999" style="line-height:150%"><?php echo $_smarty_tpl->tpl_vars['l']->value['content'];?>
+   <div style="width:100%;border-bottom:1px solid #ddd;padding: 0 0 0;">
+    <div style="line-height:20px;margin-top:5px">
+	  <p style="width:100%;float:left;font-size:18px;margin-top:0;padding:0 0 5px 0"><?php echo $_smarty_tpl->tpl_vars['l']->value['title'];?>
 </p>
+      
+      <?php if (!empty($_smarty_tpl->tpl_vars['l']->value['first_pic'])){?>
+	   <p><img src="<?php echo $_smarty_tpl->tpl_vars['l']->value['first_pic'];?>
+" style="max-height:130px;"></p>
+	  <?php }?>
+       <p class="color999" style="line-height:150%;padding:20px 0 0 0;"><?php echo $_smarty_tpl->tpl_vars['l']->value['content'];?>
+</p>
+       <p style="text-align: left;padding:5px 0 0 0" class="color999"><?php echo $_smarty_tpl->tpl_vars['l']->value['add_time'];?>
+</p>
+	</div>
+	
    </div>
    </a>
+  </div>
   <?php } ?>
  <?php echo $_smarty_tpl->getSubTemplate ("library/page.htm", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 	

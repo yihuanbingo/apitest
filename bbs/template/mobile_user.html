@@ -39,6 +39,16 @@
           <!-- ENDIF -->
           </h3>
         </div>
+		<!-- IF postType == "bigheadimg" -->
+		  <!-- IF bigheadimg == "" -->
+		   <div class="inner"><strong>该用户还没有上传个性头像</strong></div>
+		  <!-- ELSE -->
+		   <div style="padding:8px;">
+		    <img src="{:bigheadimg}" style="max-width:100%;border-radius:5px">
+		   </div>
+		  <!-- ENDIF -->
+		<!-- ENDIF -->
+		
         <!-- BEGIN postList.list -->
           <div class="cell" id="favorite-{:tid}-{:pid}">
             <div class="item">
@@ -57,14 +67,13 @@
                   <a href="./t.php?id={:tid}#reply{:pid}">{:posttime}</a>
                 <!-- ELSEIF top.postType == "favorite" -->
                   <a href="./t.php?id={:tid}<!-- IF pid > "0" -->#reply{:pid}<!-- ENDIF -->">{:posttime}</a>
-                  <a onClick="deleteFavorite({:tid},{:pid});" class="delete">取消收藏</a>
-				<!-- ELSEIF top.postType == "bigheadimg" -->
-				 <img src="{:bigheadimg}" width="100%">
+                  <a onClick="deleteFavorite({:tid},{:pid});" class="delete">取消收藏</a>	
                 <!-- ENDIF -->
               </div>
             </div>
           </div>
         <!-- END -->
+		<!-- IF postType != "bigheadimg" -->
         <div class="inner">
           <!-- IF postList.page.Total > "1" -->
             <!-- IF postList.page.Prev != "" -->
@@ -78,6 +87,7 @@
             <strong><!-- IF postList.count > "0" -->已加载全部数据<!-- ELSE -->暂无数据<!-- ENDIF --></strong>
           <!-- ENDIF -->
         </div>
+		<!-- ENDIF -->
       </div>
     </div>
   </div>

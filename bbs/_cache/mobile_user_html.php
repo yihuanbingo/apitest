@@ -135,6 +135,29 @@ echo $_obj['userInfo']['nickname'];
 ?>
           </h3>
         </div>
+		<?php
+if ($_obj['postType'] == "bigheadimg"){
+?>
+		  <?php
+if ($_obj['bigheadimg'] == ""){
+?>
+		   <div class="inner"><strong>该用户还没有上传个性头像</strong></div>
+		  <?php
+} else {
+?>
+		   <div style="padding:8px;">
+		    <img src="<?php
+echo $_obj['bigheadimg'];
+?>
+" style="max-width:100%;border-radius:5px">
+		   </div>
+		  <?php
+}
+?>
+		<?php
+}
+?>
+		
         <?php
 if (!empty($_obj['postList']['list'])){
 if (!is_array($_obj['postList']['list']))
@@ -256,14 +279,7 @@ echo $_obj['tid'];
 ,<?php
 echo $_obj['pid'];
 ?>
-);" class="delete">取消收藏</a>
-				<?php
-} elseif ($_stack[0]['postType'] == "bigheadimg"){
-?>
-				 <img src="<?php
-echo $_obj['bigheadimg'];
-?>
-" width="100%">
+);" class="delete">取消收藏</a>	
                 <?php
 }
 ?>
@@ -273,6 +289,9 @@ echo $_obj['bigheadimg'];
         <?php
 }
 $_obj=$_stack[--$_stack_cnt];}
+?>
+		<?php
+if ($_obj['postType'] != "bigheadimg"){
 ?>
         <div class="inner">
           <?php
@@ -325,6 +344,9 @@ if ($_obj['postList']['count'] > "0"){
 }
 ?>
         </div>
+		<?php
+}
+?>
       </div>
     </div>
   </div>

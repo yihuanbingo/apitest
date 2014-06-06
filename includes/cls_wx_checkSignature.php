@@ -13,7 +13,7 @@ if (!defined('IN_BS'))
 class wx_checkSignature
 {
 
-	static $token = 'a23dfa3sdf34llk423oiu242342fasdf';
+	static $token = 'bangsoontestsite';
 	
 	/*
 	 * 验证签名
