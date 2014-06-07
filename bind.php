@@ -46,7 +46,7 @@ elseif($act=='act_community')
 	     $_SESSION['wx']['community_id'] = $community_id;
 	     $msg = array(
 		 'error'=>0,
-		 'data'=>'绑定成功，现在为您跳转',
+		 'data'=>'绑定成功，现在为您跳转'.$_SESSION['wx']['openid'],
 		 'href'=>$_SESSION['wx']['redirectUrl'],
 		 );
 	  }   

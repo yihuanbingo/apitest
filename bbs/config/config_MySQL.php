@@ -1,5 +1,5 @@
 <?php
-$mysql_host		= "localhost";
+$mysql_host		= "112.124.119.178";
 
 $mysql_user		= "root";
 

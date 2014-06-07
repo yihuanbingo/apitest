@@ -7,8 +7,8 @@
 */
 class Wx {
 
-   static $appid = 'wx91c5fd7d0669a634';
-   static $appsecret = '70fd10a8dfbfdb8f218e3cd4307e90ad';
+   static $appid = 'wxc2705fbb2964ea45';
+   static $appsecret = '866c7ca8c3ee3f50a9319ba13f78f930';
    static $member_url = "https://api.weixin.qq.com/cgi-bin/user/info?";
 
    /*
@@ -105,6 +105,7 @@ class Wx {
 		 $nickname = $memberInfo->nickname;
 		 if($DB->fetch_one("select uid from phpsay_member where nickname='$nickname'"))   //昵称已存在
 		 {
+			 echo $nickname;
 		    $_SESSION['tmpUser'] = array('openid'=>$openid,'headimgurl'=>$memberInfo->headimgurl); 
 		    $template = template("mobile_setname.html");
 			$template->assign( 'PHPSayConfig', $GLOBALS['PHPSayConfig'] );

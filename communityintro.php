@@ -9,7 +9,6 @@ require("includes/init.php");
 Transaction::checkUserCommunity($redirectUrl='communityintro.html');
  
 $act = isset($_REQUEST['act']) ? $Common->charFormat($_REQUEST['act']): 'default';
-
 /* 默认显示绑定与小区介绍 */
 if($act=='default')
 {

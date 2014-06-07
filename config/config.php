@@ -3,7 +3,7 @@
  * smarty配置信息
  * smarty 3.1.7
  * author yuanjiang @2.16.2013 
-*/
+*/ 
 if(!defined('IN_BS'))
 {
   die('hacking attempt');
@@ -27,7 +27,7 @@ date_default_timezone_set('Asia/Chongqing');
 error_reporting(0);
 
 /* 数据库设置 */
-$host = 'localhost';
+$host = '112.124.119.178';
 $db_user = 'root';
 $db_pass = '20140303Dyw';
 $charset = 'utf8';  //编码

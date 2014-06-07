@@ -9,8 +9,8 @@ if(!defined('IN_BS'))
 
 define('ROOT_PATH',                     './');   // 图片上传根目录
 
-define('API_HOST',                     'http://api.bangsoon.cn/');        //客户端响应服务器
-define('WWW_HOST',                     'http://property.bangsoon.cn/');         //PC端响应服务器
+define('API_HOST',                     'http://api.bangsoon.net/');        //客户端响应服务器
+define('WWW_HOST',                     'http://property.bangsoon.net/');         //PC端响应服务器
 
 $smarty->assign('api_host',API_HOST);
 
