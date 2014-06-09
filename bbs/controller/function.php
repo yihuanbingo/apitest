@@ -527,4 +527,12 @@ function sendPasswordEmail($sendName,$SendMail,$receiveMail,$receiveName,$resetC
 
 	@mail($receiveMail,$sendName."-密码重置",$mailBody,$headers);
 }
+
+/* 表情插件将代码替换为图片 */
+function ubbReplace($str)
+{ 
+    $str = preg_replace("[\[em_([0-9]*)\]]","<img src=\"template/qqemotion/arclist/$1.gif\" />",$str);
+    return $str; 
+}
+
 ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-06-06 12:43:30
+<?php /* Smarty version Smarty-3.1.7, created on 2014-06-06 17:21:35
          compiled from "./templates/info.html" */ ?>
 <?php /*%%SmartyHeaderCode:12117194335387f6eaab6959-64342616%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aa59ea88bdc58fe19421f98e3c8e87d97cc53347' => 
     array (
       0 => './templates/info.html',
-      1 => 1402029808,
+      1 => 1402046487,
       2 => 'file',
     ),
   ),
@@ -57,10 +57,10 @@ $_smarty_tpl->tpl_vars['l']->_loop = true;
 	   <p><img src="<?php echo $_smarty_tpl->tpl_vars['l']->value['first_pic'];?>
 " style="max-height:130px;"></p>
 	  <?php }?>
-       <p class="color999" style="line-height:150%;padding:20px 0 0 0;"><?php echo $_smarty_tpl->tpl_vars['l']->value['content'];?>
+       <p class="color999" style="line-height:130%;padding:20px 0 0 0;"><?php echo $_smarty_tpl->tpl_vars['l']->value['content'];?>
 </p>
-       <p style="text-align: left;padding:5px 0 0 0" class="color999"><?php echo $_smarty_tpl->tpl_vars['l']->value['add_time'];?>
-</p>
+       <p style="text-align: right;padding:5px 0 0 0" class="color999">—<?php echo $_smarty_tpl->tpl_vars['l']->value['add_time'];?>
+—</p>
 	</div>
 	
    </div>

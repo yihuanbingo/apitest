@@ -57,7 +57,7 @@ if ($_obj['settingType'] == "avatar"){
               <img src="<?php
 echo $_obj['loginInfo']['avatar'];
 ?>
-" style="float:left;margin-right:10px">
+" style="float:left;margin-right:10px;margin-bottom:5px;">
               <font style="font-size:16px"><?php
 echo $_obj['loginInfo']['nickname'];
 ?>
@@ -126,8 +126,10 @@ if ($_obj['userInfo']['password'] != ""){
   <div class="footer">
 	&copy; 2014 小区快帮
 </div>
-  <script type="text/javascript">
-
+  <div class="hidden">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F12c7ebc0d5e268e34feb51b6c41feead' type='text/javascript'%3E%3C/script%3E"));
 </script>
 </body>
 </html>

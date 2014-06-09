@@ -17,13 +17,13 @@ require("includes/cls_wx_checkSignature.php");
 */
 $WxPostStr = Transaction::getWxPostStr();  
 $MsgType = $WxPostStr->MsgType;
+$FromUserName = $WxPostStr->FromUserName;   //用户微信号
+$ToUserName = $WxPostStr->ToUserName;       //开发者微信号
 
 /* event，不需要验证签名 */
 if($MsgType=='event')
 { 
    $Event = $WxPostStr->Event;                 //事件名称
-   $FromUserName = $WxPostStr->FromUserName;   //用户微信号
-   $ToUserName = $WxPostStr->ToUserName;       //开发者微信号
 
    if($Event=='CLICK')   //菜单栏点击事件
    {
@@ -89,7 +89,7 @@ if($MsgType=='event')
 	  {
 	     $community_name = $Mysql->getOne($sql);
 	     $data[] = array(
-			'title'=>empty($community_name) ? '小区论坛': $community_name.'论坛',
+			'title'=>empty($community_name) ? '点击进入小区论坛': '点击进入'.$community_name.'论坛',
 			'description'=>'吃喝玩乐，再也不缺小伙伴啦！还宅在家里发霉？楼上楼下的美女帅哥，都来这里啦！',
 			'picUrl'=>API_HOST.'templates/images/weixin/'.$EventKey.'.jpg',
 			'url'=>API_HOST.'bbs/?openid='.$WxPostStr->FromUserName,
@@ -165,8 +165,7 @@ if($MsgType=='event')
    }
    elseif($Event=='unsubscribe')   //取消关注
    {
-      //$sql = "delete from ".$Base->table('user')." where openid='".$FromUserName."' ";
-	  //$Mysql->query($sql);
+      //todo  
    }
 }
 /* text、image、void、video、location、link，用户主动发送，需要验证签名*/
@@ -179,6 +178,29 @@ else
    //签名验证成功
    if(wx_checkSignature::checkSignature($signature, $timestamp, $nonce))   
    {
+      /* 用户发送的文本信息 */
+      if($MsgType=='text')
+	  {
+	     $content = $WxPostStr->Content;
+	     if(Transaction::overridestripos($content,'论坛') || Transaction::overridestripos($content,'bbs'))
+		 {
+		    $message = "Hi，你是要进入小区论坛吗～在论坛，可以找话题、找兴趣、找邻居，".
+				       "可以参与小区活动，也可以亲手组织，".
+				       "可以潜水冒泡，也可以成为意见领袖！".
+					   "\n<a href='".API_HOST."bbs/?openid=".$WxPostStr->FromUserName."'>点击进入小区论坛 </a>";
+		 }
+		 elseif(Transaction::overridestripos($content,'物业') || Transaction::overridestripos($content,'物管'))
+		 {
+		    $message = "物业费查询，停车费查询，快递包裹查询；一键查询，就是这么简单！".
+					   "\n<a href='".API_HOST."myproperty.html?openid=".$WxPostStr->FromUserName."'>点击进入我的物业 </a>";
+		 }
+		 elseif(Transaction::overridestripos($content,'登陆'))
+		 {
+		    $message = "亲，你现在已经登陆了，请点击菜单栏或回复关键字进行各项操作";
+		 }
+		 echo Transaction::sendText($message,$FromUserName,$ToUserName);
+		 exit;
+	  }
       echo $echoStr;
       exit;
    }

@@ -183,7 +183,7 @@ class PHPSay
 									"nickname"	=> $Re['nickname'],
 									"tid"		=> $Re['tid'],
 									"pid"		=> $Re['pid'],
-									"message"	=> filterHTML($Re['message']),
+									"message"	=> ubbReplace(filterHTML($Re['message'])),
 									"smallimg"	=> getImageURL($Re["picture"],"s"),
 									"bigimage"	=> getImageURL($Re["picture"],"b"),
 									"posttime"	=> countDownTime($Re["posttime"]),
@@ -282,7 +282,7 @@ class PHPSay
 									"nickname"	=> $Re['nickname'],
 									"tid"		=> $Re['tid'],
 									"pid"		=> $Re['pid'],
-									"message"	=> filterHTML($Re['message']),
+									"message"	=> ubbReplace(filterHTML($Re['message'])),
 									"smallimg"	=> getImageURL($Re["picture"],"s"),
 									"bigimage"	=> getImageURL($Re["picture"],"b"),
 									"posttime"	=> countDownTime($Re["posttime"]));
@@ -535,12 +535,13 @@ class PHPSay
 								"nickname"	=> $Re['nickname'],
 								"cid"		=> $Re['cid'],
 								"clubname"	=> $Re['clubname'],
-								"message"	=> filterHTML($Re['message']),
+								"message"	=> ubbReplace(filterHTML($Re['message'])),
 								"smallimg"	=> getImageURL($Re["picture"],"s"),
 								"bigimage"	=> getImageURL($Re["picture"],"b"),
 								"posttime"	=> countDownTime($Re["posttime"]),
 								"lasttime"	=> $Re["lasttime"],
 								"comments"	=> $Re["comments"],
+								"stick"     => $Re["stick"],
 								"groupid" => $DB->fetch_one("select groupid from phpsay_member where uid=".$Re['uid'].""),								
 								);
 		}
@@ -593,7 +594,7 @@ class PHPSay
 
 		if ( $Total > 0 )
 		{
-			$Result = $DB->query("SELECT * FROM `phpsay_topic` ".$whereSQL." ORDER BY `lasttime` DESC LIMIT ".($page-1)*$per.",".$per);
+			$Result = $DB->query("SELECT * FROM `phpsay_topic` ".$whereSQL." ORDER BY `stick` DESC,`lasttime` DESC LIMIT ".($page-1)*$per.",".$per);
 
 			while($Re = $DB->fetch_array($Result))
 			{
@@ -603,12 +604,13 @@ class PHPSay
 									"nickname"	=> $Re['nickname'],
 									"cid"		=> $Re['cid'],
 									"clubname"	=> ($key == "club") ? "" : $Re['clubname'],
-									"message"	=> filterHTML($Re['message']),
+									"message"	=> ubbReplace(filterHTML($Re['message'])),
 									"smallimg"	=> getImageURL($Re["picture"],"s"),
 									"bigimage"	=> getImageURL($Re["picture"],"b"),
 									"posttime"	=> countDownTime($Re["posttime"]),
 									"lasttime"	=> countDownTime($Re["lasttime"]),
 									"comments"	=> $Re["comments"],
+									"stick"     => $Re["stick"],
 									"groupid" => $DB->fetch_one("select groupid from phpsay_member where uid=".$Re['uid'].""),
 									);
 			}
@@ -697,7 +699,7 @@ class PHPSay
 									"uid"		=> $Re['uid'],
 									"avatar"	=> getAvatarURL($DB,$Re['uid']),
 									"nickname"	=> $Re['nickname'],
-									"message"	=> filterHTML($Re['message']),
+									"message"	=> ubbReplace(filterHTML($Re['message'])),
 									"smallimg"	=> getImageURL($Re["picture"],"s"),
 									"bigimage"	=> getImageURL($Re["picture"],"b"),
 									"posttime"	=> countDownTime($Re["posttime"]),

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-06-03 18:13:11
+<?php /* Smarty version Smarty-3.1.7, created on 2014-06-07 21:32:33
          compiled from "./templates/library/page_header.htm" */ ?>
 <?php /*%%SmartyHeaderCode:1727852988536313157cb527-93065490%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9fa1100c018bd12d28698428490a1488f2e47414' => 
     array (
       0 => './templates/library/page_header.htm',
-      1 => 1401790348,
+      1 => 1402147947,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo $_smarty_tpl->tpl_vars['_lang']->value['title'];?>
 </title>
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">

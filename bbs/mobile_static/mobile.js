@@ -820,6 +820,53 @@ function deleteTopic(tid,cid)
 	}
 }
 
+function stickTopic()
+{
+	var arr = $(this).attr("data").split("-");
+	var o = $(this);
+	o.hide();
+	$.post("post.php",{"do":"stickTopic","tid":arr[1]},function(data)
+	{
+		if (data.result == "success")
+		{
+			o.removeClass("stick");
+
+			o.addClass("sticked");
+	
+			o.unbind();
+	
+			o.click(nostickTopic);
+		}
+	
+		o.show();
+	
+	},"json");
+	
+}
+function nostickTopic()
+{
+
+	var arr = $(this).attr("data").split("-");
+	var o = $(this);
+	o.hide();
+	$.post("post.php",{"do":"nostickTopic","tid":arr[1]},function(data)
+	{
+		if (data.result == "success")
+		{
+			o.removeClass("sticked");
+	
+			o.addClass("stick");
+	
+			o.unbind();
+	
+			o.click(stickTopic);
+		}
+	
+		o.show();
+	
+	},"json");
+	
+}
 function deleteReply(pid)
 {
 	if(confirm("确定要删除该条回复吗？"))

@@ -384,6 +384,7 @@ a.current {
 	opacity:0.6;
 	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
 }
+
 .item .item-info a.reply {
     position:absolute;
     right:60px;
@@ -426,6 +427,30 @@ a.current {
 	background-size:16px 16px;
 	text-indent:-9999px;
 	opacity:0.5;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+.item .item-info a.stick {
+    position:absolute;
+    right:95px;
+    top:1px;
+    display:inline-block;
+    width:16px;
+    height:16px;
+	background:url("nostick.gif") no-repeat;
+	text-indent:-9999px;
+	opacity:0.6;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+.item .item-info a.sticked {
+    position:absolute;
+    right:95px;
+    top:1px;
+    display:inline-block;
+    width:16px;
+    height:16px;
+	background:url("stick.gif") no-repeat;
+	text-indent:-9999px;
+	opacity:0.6;
 	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
 }
 .item .item-info a.hidden {

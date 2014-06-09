@@ -5,20 +5,18 @@
   <meta content="width=device-width, height=device-height, user-scalable=no" name="viewport">
   <title>{:PHPSayConfig.sitename}</title>
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="template/qqemotion/css/qqemotion.css">
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <script type="text/javascript" src="template/qqemotion/js/jquery.qqFace.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
-   // $("#reply-topic-form").submit(replyTopic);
-//    $("#reply-topic-form textarea[name=message]").focusin(function(){
-//      $(this).attr("rows","6");
-//    }).focusout(function(){
-//      $(this).attr("rows","3");
-//    });
     $(".favorite").click(favoriteMsg);
     $(".favorited").click(unFavoriteMsg);
+	$(".stick").click(stickTopic);
+	$(".sticked").click(nostickTopic);
     <!-- IF loginInfo.group < "2" -->
     $(".reply").css({"right":"30px"}).fadeIn();
     $(".favorite").css({"right":"0"}).fadeIn();
@@ -27,8 +25,16 @@
     $(".reply").fadeIn();
     $(".favorite").fadeIn();
     $(".favorited").fadeIn();
+	$(".stick").fadeIn();
+	$(".sticked").fadeIn();
     <!-- ENDIF -->
     locationHash();
+    /* 初始化qq表情插件 */
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'saytext', 
+		path:'template/qqemotion/arclist/'	//表情存放的路径
+	});
   });
   </script>
 </head>
@@ -52,8 +58,8 @@
             <div class="item-nickname">
               <a href="user.php?id={:topicInfo.uid}">
 			  {:topicInfo.nickname}
-			  <!-- IF topicInfo.groupid == "2" -->
-			    <span class="tag">小区管理员</span>
+			  <!-- IF topicInfo.groupid > "1" -->
+			    <span class="tag">管理员</span>
 			   <!-- ENDIF -->
 			  </a>
             </div>
@@ -67,10 +73,12 @@
             <!-- ENDIF -->
             <div class="item-info">
               <span class="time">{:topicInfo.posttime}</span>
+              <a class="stick<!-- IF topicInfo.stick != "0" -->ed<!-- ENDIF --> hidden" data="topic-{:topicInfo.tid}">置顶</a>
               <a onClick="replyAt('{:topicInfo.nickname}');" class="reply hidden">回复</a>
               <a class="favorite<!-- IF favoriteId != "" -->d<!-- ENDIF --> hidden" data="topic-{:topicInfo.tid}">收藏</a>
               <!-- IF loginInfo.group > "1" -->
                 <a onClick="deleteTopic({:topicInfo.tid},{:topicInfo.cid});" class="delete">删除</a>
+                
               <!-- ENDIF -->              
             </div>
           </div>
@@ -81,11 +89,15 @@
               <input type="file" name="picture" id="picture">
             </div>
 			<div class="input-body">
-              <textarea maxlength="200" name="message" rows="5"></textarea>
+              <textarea maxlength="200" id="saytext" name="message" rows="5"></textarea>
             </div>
 			<input type="hidden" name="do" value="replyTopic">
             <input type="hidden" name="tid" value="{:topicInfo.tid}">
-            <input class="submit-button" type="button" value="发表回复" onClick="javascript:replyTopic();">
+            <div>
+			 <span class="emotion">表情</span>
+		     <input type="button" class="sub_btn" value="提 交" onClick="javascript:replyTopic();">
+            </div>
+			<div style="clear:both"></div>
           </form>
         </div>
       </div>
@@ -99,8 +111,8 @@
             </div>
             <div class="item-nickname">
               <a href="user.php?id={:uid}">{:nickname} 
-			   <!-- IF groupid == "2" -->
-			    <span class="tag">小区管理员</span>
+			   <!-- IF groupid > "1" -->
+			    <span class="tag">管理员</span>
 			   <!-- ENDIF -->
 			  </a>
             </div>

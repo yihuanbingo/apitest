@@ -3,7 +3,7 @@
  * smarty配置信息
  * smarty 3.1.7
  * author yuanjiang @2.16.2013 
-*/ 
+*/
 if(!defined('IN_BS'))
 {
   die('hacking attempt');

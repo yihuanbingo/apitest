@@ -8,10 +8,12 @@ echo $_obj['PHPSayConfig']['sitename'];
 ?>
 </title>
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="template/qqemotion/css/qqemotion.css">
   <link rel="apple-touch-icon" href="mobile_static/apple-touch-icon.png" />
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <script type="text/javascript" src="template/qqemotion/js/jquery.qqFace.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
@@ -21,11 +23,12 @@ if ($_obj['clubList']['current']['cid'] > "0"){
     $(".add-topic").click(function(){
       $("#add-topic-form textarea[name=message]").focus();
     });
-//    $("#add-topic-form textarea[name=message]").focusin(function(){
-//      $(this).attr("rows","6");
-//    }).focusout(function(){
-//      $(this).attr("rows","3");
-//    });
+	/* 初始化qq表情插件 */
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'saytext', 
+		path:'template/qqemotion/arclist/'	//表情存放的路径
+	});
     <?php
 }
 ?>
@@ -155,7 +158,7 @@ echo $_obj['nickname'];
 			  <?php
 if ($_obj['groupid'] == "2"){
 ?>
-			   <span class="tag">小区管理员</span>
+			   <span class="tag">管理员</span>
 			  <?php
 }
 ?>
@@ -298,15 +301,19 @@ if ($_obj['clubList']['current']['cid'] > "0"){
               <input type="file" name="picture" id="picture">
             </div>
             <div class="input-body">
-              <textarea maxlength="200" name="message" rows="5"></textarea>
+              <textarea maxlength="200" id="saytext" name="message" rows="5"></textarea>
             </div>
 			<input type="hidden" name="do" value="addTopic">
             <input type="hidden" name="cid" value="<?php
 echo $_obj['clubList']['current']['cid'];
 ?>
 ">
-            <input class="submit-button" type="button" value="提交发布" onClick="javascript:postTopic();">
-          </form>
+			<div>
+			 <span class="emotion">表情</span>
+		     <input type="button" class="sub_btn" value="提 交" onClick="javascript:postTopic();">
+            </div>
+			<div style="clear:both"></div>
+		  </form>
         </div>
       </div>
       <?php
@@ -317,8 +324,10 @@ echo $_obj['clubList']['current']['cid'];
   <div class="footer">
 	&copy; 2014 小区快帮
 </div>
-  <script type="text/javascript">
-
+  <div class="hidden">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F12c7ebc0d5e268e34feb51b6c41feead' type='text/javascript'%3E%3C/script%3E"));
 </script>
 </body>
 </html>

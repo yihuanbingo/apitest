@@ -183,6 +183,26 @@ if ( $loginInfo['uid'] >= 1 )
 				echo '{"result":"success"}';
 			}
 		}
+		else if($_POST['do'] == "stickTopic")
+		{
+			if ( $loginInfo['group'] > 1 && isset($_POST['tid']) && is_numeric($_POST['tid']) )
+			{ 
+				$DB = database();
+				$DB->query("UPDATE `phpsay_topic` SET `stick`=1 WHERE `tid`=".$_POST['tid']);
+				$DB->close();
+				echo '{"result":"success"}';
+			}
+		}
+		else if($_POST['do'] == "nostickTopic")
+		{
+			if ( $loginInfo['group'] > 1 && isset($_POST['tid']) && is_numeric($_POST['tid']) )
+			{ 
+				$DB = database();
+				$DB->query("UPDATE `phpsay_topic` SET `stick`=0 WHERE `tid`=".$_POST['tid']);
+				$DB->close();
+				echo '{"result":"success"}';
+			}
+		}
 		if($_POST['do'] == "replyTopic")
 		{
 			if( isset($_POST['tid'],$_POST['message']) && is_numeric($_POST['tid']) )

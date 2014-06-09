@@ -105,7 +105,6 @@ class Wx {
 		 $nickname = $memberInfo->nickname;
 		 if($DB->fetch_one("select uid from phpsay_member where nickname='$nickname'"))   //昵称已存在
 		 {
-			 echo $nickname;
 		    $_SESSION['tmpUser'] = array('openid'=>$openid,'headimgurl'=>$memberInfo->headimgurl); 
 		    $template = template("mobile_setname.html");
 			$template->assign( 'PHPSayConfig', $GLOBALS['PHPSayConfig'] );

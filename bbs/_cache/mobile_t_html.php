@@ -8,18 +8,14 @@ echo $_obj['PHPSayConfig']['sitename'];
 ?>
 </title>
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="template/qqemotion/css/qqemotion.css">
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <script type="text/javascript" src="template/qqemotion/js/jquery.qqFace.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
-   // $("#reply-topic-form").submit(replyTopic);
-//    $("#reply-topic-form textarea[name=message]").focusin(function(){
-//      $(this).attr("rows","6");
-//    }).focusout(function(){
-//      $(this).attr("rows","3");
-//    });
     $(".favorite").click(favoriteMsg);
     $(".favorited").click(unFavoriteMsg);
     <?php
@@ -38,6 +34,12 @@ if ($_obj['loginInfo']['group'] < "2"){
 }
 ?>
     locationHash();
+    /* 初始化qq表情插件 */
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'saytext', 
+		path:'template/qqemotion/arclist/'	//表情存放的路径
+	});
   });
   </script>
 </head>
@@ -95,9 +97,9 @@ echo $_obj['topicInfo']['nickname'];
 ?>
 
 			  <?php
-if ($_obj['topicInfo']['groupid'] == "2"){
+if ($_obj['topicInfo']['groupid'] > "1"){
 ?>
-			    <span class="tag">小区管理员</span>
+			    <span class="tag">管理员</span>
 			   <?php
 }
 ?>
@@ -163,14 +165,18 @@ echo $_obj['topicInfo']['cid'];
               <input type="file" name="picture" id="picture">
             </div>
 			<div class="input-body">
-              <textarea maxlength="200" name="message" rows="5"></textarea>
+              <textarea maxlength="200" id="saytext" name="message" rows="5"></textarea>
             </div>
 			<input type="hidden" name="do" value="replyTopic">
             <input type="hidden" name="tid" value="<?php
 echo $_obj['topicInfo']['tid'];
 ?>
 ">
-            <input class="submit-button" type="button" value="发表回复" onClick="javascript:replyTopic();">
+            <div>
+			 <span class="emotion">表情</span>
+		     <input type="button" class="sub_btn" value="提 交" onClick="javascript:replyTopic();">
+            </div>
+			<div style="clear:both"></div>
           </form>
         </div>
       </div>
@@ -214,9 +220,9 @@ echo $_obj['nickname'];
 ?>
  
 			   <?php
-if ($_obj['groupid'] == "2"){
+if ($_obj['groupid'] > "1"){
 ?>
-			    <span class="tag">小区管理员</span>
+			    <span class="tag">管理员</span>
 			   <?php
 }
 ?>
@@ -330,8 +336,10 @@ if ($_obj['replyList']['count'] > "0"){
   <div class="footer">
 	&copy; 2014 小区快帮
 </div>
-  <script type="text/javascript">
-
+  <div class="hidden">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F12c7ebc0d5e268e34feb51b6c41feead' type='text/javascript'%3E%3C/script%3E"));
 </script>
 </body>
 </html>

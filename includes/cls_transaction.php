@@ -191,5 +191,17 @@ class Transaction extends Common
 	  return $arr;
    }
    
+   /*
+   * 判断字符串是否包含某字符
+   */
+   static function overridestripos($string,$find)
+   {
+      if(stripos($string,$find)===false)
+	  {
+	     return false;
+	  }
+	  return true;
+   }
+   
 }
 ?>

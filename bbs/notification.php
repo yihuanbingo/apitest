@@ -9,7 +9,7 @@ else
 {
 	$notifyStatus = ( isset($_GET['status']) && ($_GET['status'] == "0" || $_GET['status'] == "1") ) ? $_GET['status'] : "";
 
-	$template = template( $isMobileRequest ? "mobile_notification.html" : "notification.html" );
+	$template =  template("mobile_notification.html"); //template( $isMobileRequest ? "mobile_notification.html" : "notification.html" );
 
 	$template->assign( 'PHPSayConfig', $PHPSayConfig );
 
