@@ -11,7 +11,7 @@ Transaction::checkUserCommunity($redirectUrl='advice.html');
 class Advice extends Common
 {
    /*
-   * 根据status提取用户的报修申请
+   * 根据status提取用户的投诉建议
    */
    static function getAdviceLog($community_id,$user_id,$pageNow,$pageNum,$status)
    {
@@ -42,13 +42,13 @@ class Advice extends Common
 
 $act = isset($_REQUEST['act']) ? $Common->charFormat($_REQUEST['act']): 'default';
 
-/* 显示报修申请 */
+/* 显示投诉建议 */
 if($act=='default')
 {
    $phone = $Mysql->getOne("select contact_phone from ".$Base->table('community')." where community_id=".$_SESSION['wx']['community_id']." ");
    $smarty->assign('phone',$phone);
 }
-/* 执行报修申请 */
+/* 执行投诉建议 */
 elseif($act=='act_default')
 {
    $name = isset($_POST['name']) ? $Common->charFormat($_POST['name']): '';
@@ -99,7 +99,7 @@ elseif($act=='act_default')
    echo $msg;
    exit;
 }
-/* 我的报修申请 */
+/* 我的投诉建议 */
 elseif($act=='mine')
 {
    $status = isset($_REQUEST['status']) ? intval($_REQUEST['status']): 0 ; 
@@ -111,7 +111,7 @@ elseif($act=='mine')
    $smarty->assign('log',$log['res']);
    
 }
-/* 撤销报修 */
+/* 撤销投诉建议 */
 elseif($act=='cancel')
 {
    $advice_id = isset($_POST['advice_id']) ? intval($_POST['advice_id']): 0;
@@ -126,6 +126,28 @@ elseif($act=='cancel')
 	      $msg = array(
 		  'error'=>0,
 		  'data'=>'成功撤销该投诉/建议',
+		  );
+	   }
+   }
+   $msg = $Json->encode($msg);
+   echo $msg;
+   exit;
+}
+/* 删除投诉建议 */
+elseif($act=='delete')
+{
+   $advice_id = isset($_POST['advice_id']) ? intval($_POST['advice_id']): 0;
+   $sql = "select advice_id from ".$Base->table('advice')." where advice_id=$advice_id and user_id=".$_SESSION['wx']['user_id']." and community_id=".$_SESSION['wx']['community_id']." ";
+   $advice_id = $Mysql->getOne($sql);
+   $msg = array('error'=>1,'data'=>'系统错误，操作失败');
+   if($advice_id)
+   {
+       $sql = "delete from ".$Base->table('advice')." where advice_id=$advice_id ";
+	   if($Mysql->query($sql))
+	   {
+	      $msg = array(
+		  'error'=>0,
+		  'data'=>'成功删除该投诉/建议',
 		  );
 	   }
    }

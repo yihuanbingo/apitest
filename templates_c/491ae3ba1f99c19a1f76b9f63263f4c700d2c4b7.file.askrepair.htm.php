@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-06-04 19:00:11
+<?php /* Smarty version Smarty-3.1.7, created on 2014-06-10 13:51:51
          compiled from "./templates/askrepair.htm" */ ?>
 <?php /*%%SmartyHeaderCode:1701770055365cf224453c1-19306523%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '491ae3ba1f99c19a1f76b9f63263f4c700d2c4b7' => 
     array (
       0 => './templates/askrepair.htm',
-      1 => 1401879584,
+      1 => 1402378595,
       2 => 'file',
     ),
   ),
@@ -127,44 +127,79 @@ $_smarty_tpl->tpl_vars['l']->_loop = true;
 </p>
                 <?php if ($_smarty_tpl->tpl_vars['l']->value['reply']!=''){?><div class="color999"><p>物业反馈：<?php echo $_smarty_tpl->tpl_vars['l']->value['reply'];?>
 </p></div><?php }?>
+				<div class="footReturn">
 				<?php if ($_smarty_tpl->tpl_vars['status']->value==0){?>							
-	             <div class="footReturn">
 				  <input  class="submit" value="撤销报修" type="button" onclick="javascript:cancelaskrepair(<?php echo $_smarty_tpl->tpl_vars['l']->value['ask_id'];?>
 );"/>
-  <script type="text/javascript">  
-   /* 撤销报修 */
-   function cancelaskrepair(ask_id)
-   {
-      if(confirm("撤销后，该报修将不会被处理，确认撤销报修？"))
-	  {
-	     $.post("askrepair.html", {
-		 act:'cancel', ask_id:ask_id },
-    function(data)
-    {
-	   var data = json_decode(data);
-	   if(data.error==0)
-	   {
-	     alertMsg(data.data);
-		 if(data.href)
-		 {
-		     setTimeout(function(){
-			 window.location.href=data.href},1500);
-		 }
-		 else
-		 {
-	         setTimeout("window.location.reload();",1500);
-	     }
-	   }
-	   if(data.error==1)
-	   {
-		 confirm(data.data);   
-	   }
-    });
-	  }   
-   }
-  </script>
-				 </div>
-	            <?php }?>
+                  <script type="text/javascript">  
+                  /* 撤销报修 */
+                  function cancelaskrepair(ask_id)
+                  {
+                     if(confirm("撤销后，该报修将不会被处理，确认撤销报修？"))
+	                 {
+	                    $.post("askrepair.html", {
+		                                          act:'cancel', ask_id:ask_id },
+                        function(data)
+                        {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                          setTimeout(function(){
+			                                              window.location.href=data.href},1500);
+		                       }
+		                       else 
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                 </script>
+	            <?php }else{ ?>
+				  <input  class="submit" value="删除报修" type="button" onclick="javascript:deleteaskrepair(<?php echo $_smarty_tpl->tpl_vars['l']->value['ask_id'];?>
+);"/>
+                  <script type="text/javascript">  
+                  /* 撤销报修 */
+                  function deleteaskrepair(ask_id)
+                  {
+                     if(confirm("删除后，该报修将不会被保留，确认删除吗？"))
+	                 {
+	                    $.post("askrepair.html", {
+		                                          act:'delete', ask_id:ask_id },
+                        function(data)
+                        {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                          setTimeout(function(){
+			                                              window.location.href=data.href},1500);
+		                       }
+		                       else 
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                 </script>				  
+				<?php }?>
+				</div>
 	   </div>
 	  </li>
     </ul>

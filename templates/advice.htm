@@ -81,43 +81,77 @@
 				<p>联系电话：{$l.phone}</p>								
 			    <p>投诉/建议：{$l.content}</p>
                 {if $l.reply!=""}<div class="color999"><p>物业反馈：{$l.reply}</div></p>{/if}
+				<div class="footReturn">
 				{if $status==0}							
-	             <div class="footReturn">
 				  <input  class="submit" value="撤销投诉/建议" type="button" onclick="javascript:canceladvice({$l.advice_id});"/>
-  <script type="text/javascript">  
-   /* 撤销投诉/建议 */
-   function canceladvice(advice_id)
-   {
-      if(confirm("撤销后，该投诉或建议将不会被处理，确认撤销？"))
-	  {
-	     $.post("advice.html", {
-		 act:'cancel', advice_id:advice_id },
-    function(data)
-    {
-	   var data = json_decode(data);
-	   if(data.error==0)
-	   {
-	     alertMsg(data.data);
-		 if(data.href)
-		 {
-		     setTimeout(function(){
-			 window.location.href=data.href},1500);
-		 }
-		 else
-		 {
-	         setTimeout("window.location.reload();",1500);
-	     }
-	   }
-	   if(data.error==1)
-	   {
-		 confirm(data.data);   
-	   }
-    });
-	  }   
-   }
-  </script>
-				 </div>
+                  <script type="text/javascript">  
+                  /* 撤销投诉/建议 */
+                  function canceladvice(advice_id)
+                  {
+                     if(confirm("撤销后，该投诉或建议将不会被处理，确认撤销？"))
+	                 {
+	                     $.post("advice.html", {
+		                                        act:'cancel', advice_id:advice_id },
+                         function(data)
+                         {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                           setTimeout(function(){
+			                                               window.location.href=data.href},1500);
+		                       }
+		                       else
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                  </script>	
+				{else}
+				  <input  class="submit" value="删除投诉/建议" type="button" onclick="javascript:deleteadvice({$l.advice_id});"/>
+                  <script type="text/javascript">  
+                  /* 撤销投诉/建议 */
+                  function deleteadvice(advice_id)
+                  {
+                     if(confirm("撤销后，该投诉或建议将不会被保留，确认撤销？"))
+	                 {
+	                     $.post("advice.html", {
+		                                        act:'delete', advice_id:advice_id },
+                         function(data)
+                         {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                           setTimeout(function(){
+			                                               window.location.href=data.href},1500);
+		                       }
+		                       else
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                  </script>					  			 
 	            {/if}
+				</div>
 	   </div>
 	  </li>
     </ul>

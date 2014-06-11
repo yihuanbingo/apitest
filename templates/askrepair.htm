@@ -84,43 +84,77 @@
 				<p>联系电话：{$l.phone}</p>								
 			    <p>报修内容：{$l.content}</p>
                 {if $l.reply!=""}<div class="color999"><p>物业反馈：{$l.reply}</p></div>{/if}
+				<div class="footReturn">
 				{if $status==0}							
-	             <div class="footReturn">
 				  <input  class="submit" value="撤销报修" type="button" onclick="javascript:cancelaskrepair({$l.ask_id});"/>
-  <script type="text/javascript">  
-   /* 撤销报修 */
-   function cancelaskrepair(ask_id)
-   {
-      if(confirm("撤销后，该报修将不会被处理，确认撤销报修？"))
-	  {
-	     $.post("askrepair.html", {
-		 act:'cancel', ask_id:ask_id },
-    function(data)
-    {
-	   var data = json_decode(data);
-	   if(data.error==0)
-	   {
-	     alertMsg(data.data);
-		 if(data.href)
-		 {
-		     setTimeout(function(){
-			 window.location.href=data.href},1500);
-		 }
-		 else
-		 {
-	         setTimeout("window.location.reload();",1500);
-	     }
-	   }
-	   if(data.error==1)
-	   {
-		 confirm(data.data);   
-	   }
-    });
-	  }   
-   }
-  </script>
-				 </div>
-	            {/if}
+                  <script type="text/javascript">  
+                  /* 撤销报修 */
+                  function cancelaskrepair(ask_id)
+                  {
+                     if(confirm("撤销后，该报修将不会被处理，确认撤销报修？"))
+	                 {
+	                    $.post("askrepair.html", {
+		                                          act:'cancel', ask_id:ask_id },
+                        function(data)
+                        {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                          setTimeout(function(){
+			                                              window.location.href=data.href},1500);
+		                       }
+		                       else 
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                 </script>
+	            {else}
+				  <input  class="submit" value="删除报修" type="button" onclick="javascript:deleteaskrepair({$l.ask_id});"/>
+                  <script type="text/javascript">  
+                  /* 撤销报修 */
+                  function deleteaskrepair(ask_id)
+                  {
+                     if(confirm("删除后，该报修将不会被保留，确认删除吗？"))
+	                 {
+	                    $.post("askrepair.html", {
+		                                          act:'delete', ask_id:ask_id },
+                        function(data)
+                        {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                          setTimeout(function(){
+			                                              window.location.href=data.href},1500);
+		                       }
+		                       else 
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                 </script>				  
+				{/if}
+				</div>
 	   </div>
 	  </li>
     </ul>

@@ -133,6 +133,28 @@ elseif($act=='cancel')
    echo $msg;
    exit;
 }
+/* 删除报修 */
+elseif($act=='delete')
+{
+   $ask_id = isset($_POST['ask_id']) ? intval($_POST['ask_id']): 0;
+   $sql = "select ask_id from ".$Base->table('askrepair')." where ask_id=$ask_id and user_id=".$_SESSION['wx']['user_id']." and community_id=".$_SESSION['wx']['community_id']." ";
+   $ask_id = $Mysql->getOne($sql);
+   $msg = array('error'=>1,'data'=>'系统错误，操作失败');
+   if($ask_id)
+   {
+       $sql = "delete from ".$Base->table('askrepair')." where ask_id=$ask_id ";
+	   if($Mysql->query($sql))
+	   {
+	      $msg = array(
+		  'error'=>0,
+		  'data'=>'成功删除该报修内容',
+		  );
+	   }
+   }
+   $msg = $Json->encode($msg);
+   echo $msg;
+   exit;
+}
 
 $smarty->assign('act',$act);
 $smarty->display('askrepair.htm');

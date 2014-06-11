@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-06-04 19:00:03
+<?php /* Smarty version Smarty-3.1.7, created on 2014-06-10 13:51:38
          compiled from "./templates/advice.htm" */ ?>
 <?php /*%%SmartyHeaderCode:1178890434536343535f40c5-15972493%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6bec8b1056fe225df54be2b055a1b869ea5e5c72' => 
     array (
       0 => './templates/advice.htm',
-      1 => 1401879579,
+      1 => 1402378595,
       2 => 'file',
     ),
   ),
@@ -124,44 +124,79 @@ $_smarty_tpl->tpl_vars['l']->_loop = true;
 </p>
                 <?php if ($_smarty_tpl->tpl_vars['l']->value['reply']!=''){?><div class="color999"><p>物业反馈：<?php echo $_smarty_tpl->tpl_vars['l']->value['reply'];?>
 </div></p><?php }?>
+				<div class="footReturn">
 				<?php if ($_smarty_tpl->tpl_vars['status']->value==0){?>							
-	             <div class="footReturn">
 				  <input  class="submit" value="撤销投诉/建议" type="button" onclick="javascript:canceladvice(<?php echo $_smarty_tpl->tpl_vars['l']->value['advice_id'];?>
 );"/>
-  <script type="text/javascript">  
-   /* 撤销投诉/建议 */
-   function canceladvice(advice_id)
-   {
-      if(confirm("撤销后，该投诉或建议将不会被处理，确认撤销？"))
-	  {
-	     $.post("advice.html", {
-		 act:'cancel', advice_id:advice_id },
-    function(data)
-    {
-	   var data = json_decode(data);
-	   if(data.error==0)
-	   {
-	     alertMsg(data.data);
-		 if(data.href)
-		 {
-		     setTimeout(function(){
-			 window.location.href=data.href},1500);
-		 }
-		 else
-		 {
-	         setTimeout("window.location.reload();",1500);
-	     }
-	   }
-	   if(data.error==1)
-	   {
-		 confirm(data.data);   
-	   }
-    });
-	  }   
-   }
-  </script>
-				 </div>
+                  <script type="text/javascript">  
+                  /* 撤销投诉/建议 */
+                  function canceladvice(advice_id)
+                  {
+                     if(confirm("撤销后，该投诉或建议将不会被处理，确认撤销？"))
+	                 {
+	                     $.post("advice.html", {
+		                                        act:'cancel', advice_id:advice_id },
+                         function(data)
+                         {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                           setTimeout(function(){
+			                                               window.location.href=data.href},1500);
+		                       }
+		                       else
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                  </script>	
+				<?php }else{ ?>
+				  <input  class="submit" value="删除投诉/建议" type="button" onclick="javascript:deleteadvice(<?php echo $_smarty_tpl->tpl_vars['l']->value['advice_id'];?>
+);"/>
+                  <script type="text/javascript">  
+                  /* 撤销投诉/建议 */
+                  function deleteadvice(advice_id)
+                  {
+                     if(confirm("撤销后，该投诉或建议将不会被保留，确认撤销？"))
+	                 {
+	                     $.post("advice.html", {
+		                                        act:'delete', advice_id:advice_id },
+                         function(data)
+                         {
+	                        var data = json_decode(data);
+	                        if(data.error==0)
+	                        {
+	                           alertMsg(data.data);
+		                       if(data.href)
+		                       {
+		                           setTimeout(function(){
+			                                               window.location.href=data.href},1500);
+		                       }
+		                       else
+		                       {
+	                               setTimeout("window.location.reload();",1500);
+	                           }
+	                        }
+	                        if(data.error==1)
+	                        {
+		                        confirm(data.data);   
+	                        }
+                        });
+	                 }   
+                  }
+                  </script>					  			 
 	            <?php }?>
+				</div>
 	   </div>
 	  </li>
     </ul>
