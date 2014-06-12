@@ -7,6 +7,19 @@
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <link href="extensions/emoji.css" rel="stylesheet" type="text/css" />
+  <script src="extensions/emoji.js"></script>
+  <script type="text/javascript">
+	$(function () {
+	  var $text = $('.{:loginInfo.uid}');
+	  var html = $text.html().trim().replace(/\n/g, '<br/>');
+	  html = jEmoji.softbankToUnified(html);
+	  html = jEmoji.googleToUnified(html);
+	  html = jEmoji.docomoToUnified(html);
+	  html = jEmoji.kddiToUnified(html);
+	  $text.html(jEmoji.unifiedToHTML(html));
+	});
+  </script>
 </head>
 <body>
   <!-- INCLUDE mobile_header.html -->
@@ -23,7 +36,7 @@
             <form id="refreshAvatar">
             <div class="current-avatar">
               <img src="{:loginInfo.avatar}" style="float:left;margin-right:10px;margin-bottom:5px;">
-              <font style="font-size:16px">{:loginInfo.nickname}</font>
+              <font style="font-size:16px" class="{:loginInfo.uid}">{:loginInfo.nickname}</font>
             </div>
             <input class="submit-button" id="refreshAvatarSubmit" type="submit" value="刷新微信头像">
           </form>

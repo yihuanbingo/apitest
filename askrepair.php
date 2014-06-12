@@ -3,9 +3,12 @@
  * 投诉与建议
  * author yuanjiang @2.16.2013
 */
+define("IN_WD",true);
 define("IN_BS",true);
-
 require("includes/init.php");
+require("config/config.php");
+require("includes/cls_sms.php");
+require("includes/snoopy.php");
 Transaction::checkUserCommunity($redirectUrl='askrepair.html');
 
 class Askrepair extends Common
@@ -51,6 +54,7 @@ if($act=='default')
 /* 执行报修申请 */
 elseif($act=='act_default')
 {
+   $Sms = new Sms($sms_url,$sms_uid,$sms_key);     //调用短信接口
    $name = isset($_POST['name']) ? $Common->charFormat($_POST['name']): '';
    $phone = isset($_POST['phone']) ? $Common->charFormat($_POST['phone']): '';
    $content = isset($_POST['content']) ? $Common->charFormat($_POST['content']): '';
@@ -88,6 +92,12 @@ elseif($act=='act_default')
 	  $table = $Base->table('askrepair');
 	  if($Mysql->insert($data,$table))
 	  {
+		 $phone = "18200273350";
+		 $content = "我的报修申请";
+		 $snoopy = new snoopy();
+		 $sendurl = "http://{$smsapi}/sms?u={$user}&p={$pass}&m={$phone}&c=".urlencode($content);
+		 $snoopy->fetch($sendurl);
+		 $result = $snoopy->results;
 	     $msg = array(
 		 'error'=>0,
 		 'data'=>'提交成功，请等待受理',

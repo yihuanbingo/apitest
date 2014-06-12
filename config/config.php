@@ -34,4 +34,14 @@ $charset = 'utf8';  //编码
 $db_name = 'bangsoon';  
 $prefix = 'bs_';    //表前缀
 
+/* 短信接口设置 */
+$sms_url = 'http://utf8.sms.webchinese.cn';     // 应用接口地址
+$sms_uid = 'lebai100';                          // 账号
+$sms_key = '837bb2234bd3aea4b340';              // 密钥
+
+/* 短信宝接口设置 */
+$smsapi = "api.smsbao.com"; //短信网关 
+$charset = "utf8"; //文件编码 
+$user = "bangsoon"; //短信平台帐号 
+$pass = md5("www.bangsoon.cn"); //短信平台密码 
 ?>

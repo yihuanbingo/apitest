@@ -7,11 +7,26 @@
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <link href="extensions/emoji.css" rel="stylesheet" type="text/css" />
+  <script src="extensions/emoji.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
   });
   </script>  
+  <script type="text/javascript">
+  <!-- BEGIN notificationList.list -->
+	$(function () {
+	  var $text = $('.{:uid}');
+	  var html = $text.html().trim().replace(/\n/g, '<br/>');
+	  html = jEmoji.softbankToUnified(html);
+	  html = jEmoji.googleToUnified(html);
+	  html = jEmoji.docomoToUnified(html);
+	  html = jEmoji.kddiToUnified(html);
+	  $text.html(jEmoji.unifiedToHTML(html));
+	});
+   <!-- END -->
+   </script>
 </head>
 <body>
   <!-- INCLUDE mobile_header.html -->
@@ -30,12 +45,10 @@
               <a href="user.php?id={:uid}"><img src="{:avatar}"></a>
             </div>
             <div class="item-nickname">
-              <a href="user.php?id={:uid}">
-			  {:nickname}
-			  <!-- IF groupid > "1" -->
-			   <span class="tag">管理员</span>
-			  <!-- ENDIF -->
-			  </a>
+              <a href="user.php?id={:uid}" class="{:uid}">{:nickname}</a> 
+			   <!-- IF groupid > "1" -->
+			    <span class="tag">管理员</span>
+			   <!-- ENDIF -->
             </div>
             <div class="item-message">
               {:message}

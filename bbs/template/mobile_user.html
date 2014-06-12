@@ -7,11 +7,35 @@
   <link rel="stylesheet" type="text/css" media="screen" href="mobile_static/flat.css" />
   <script type="text/javascript" src="static/jquery.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
+  <link href="extensions/emoji.css" rel="stylesheet" type="text/css" />
+  <script src="extensions/emoji.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
   });
   </script>  
+  <script type="text/javascript">
+<!-- BEGIN postList.list -->
+$(function () {
+  var $text = $('.{:uid}');
+  var html = $text.html().trim().replace(/\n/g, '<br/>');
+  html = jEmoji.softbankToUnified(html);
+  html = jEmoji.googleToUnified(html);
+  html = jEmoji.docomoToUnified(html);
+  html = jEmoji.kddiToUnified(html);
+  $text.html(jEmoji.unifiedToHTML(html));
+});
+<!-- END -->
+$(function () {
+  var $text = $('.{:userInfo.uid}');
+  var html = $text.html().trim().replace(/\n/g, '<br/>');
+  html = jEmoji.softbankToUnified(html);
+  html = jEmoji.googleToUnified(html);
+  html = jEmoji.docomoToUnified(html);
+  html = jEmoji.kddiToUnified(html);
+  $text.html(jEmoji.unifiedToHTML(html));
+});
+</script>
 </head>
 <body>
   <!-- INCLUDE mobile_header.html -->
@@ -27,7 +51,7 @@
 		  <a class="tab<!-- IF postType == "bigheadimg" --> current<!-- ENDIF -->" href="./user.php?list=bigheadimg<!-- IF userInfo.uid != loginInfo.uid -->&id={:userInfo.uid}<!-- ENDIF -->">大头像</a>
         </div>
         <div class="cell">
-          <h3>
+          <h3 class="{:userInfo.uid}">
           <!-- IF postType == "topic" -->
             <!-- IF userInfo.uid == loginInfo.uid -->我<!-- ELSE -->{:userInfo.nickname}<!-- ENDIF -->发布的主题
           <!-- ELSEIF postType == "reply" -->
@@ -53,7 +77,7 @@
           <div class="cell" id="favorite-{:tid}-{:pid}">
             <div class="item">
               <div class="item-avatar"><a href="./user.php?id={:uid}"><img src="{:avatar}"></a></div>
-              <div class="item-nickname"><a href="./user.php?id={:uid}">{:nickname}</a></div>
+              <div class="item-nickname"><a href="./user.php?id={:uid}" class="{:uid}">{:nickname}</a></div>
                <div class="item-message">{:message}</div>
                <!-- IF smallimg != "" --><div class="item-image"><img src="{:smallimg}" rel="{:bigimage}"></div><!-- ENDIF -->
                <div class="item-info">

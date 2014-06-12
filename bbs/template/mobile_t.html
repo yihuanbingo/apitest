@@ -10,6 +10,8 @@
   <script type="text/javascript" src="mobile_static/jquery.form.js"></script>
   <script type="text/javascript" src="mobile_static/mobile.js"></script>
   <script type="text/javascript" src="template/qqemotion/js/jquery.qqFace.js"></script>
+  <link href="extensions/emoji.css" rel="stylesheet" type="text/css" />
+  <script src="extensions/emoji.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-image img').click(imageZoom);
@@ -37,6 +39,29 @@
 	});
   });
   </script>
+<script type="text/javascript">
+$(function () {
+  var $text = $('.{:topicInfo.uid}');
+  var html = $text.html().trim().replace(/\n/g, '<br/>');
+  html = jEmoji.softbankToUnified(html);
+  html = jEmoji.googleToUnified(html);
+  html = jEmoji.docomoToUnified(html);
+  html = jEmoji.kddiToUnified(html);
+  $text.html(jEmoji.unifiedToHTML(html));
+});
+<!-- BEGIN replyList.list -->
+$(function () {
+  var $text = $('.{:uid}');
+  var html = $text.html().trim().replace(/\n/g, '<br/>');
+  html = jEmoji.softbankToUnified(html);
+  html = jEmoji.googleToUnified(html);
+  html = jEmoji.docomoToUnified(html);
+  html = jEmoji.kddiToUnified(html);
+  $text.html(jEmoji.unifiedToHTML(html));
+});
+<!-- END -->
+</script>
+
 </head>
 <body>
   <!-- INCLUDE mobile_header.html -->
@@ -56,12 +81,10 @@
               <a href="user.php?id={:topicInfo.uid}"><img src="{:topicInfo.avatar}"></a>
             </div>
             <div class="item-nickname">
-              <a href="user.php?id={:topicInfo.uid}">
-			  {:topicInfo.nickname}
-			  <!-- IF topicInfo.groupid > "1" -->
-			    <span class="tag">管理员</span>
-			   <!-- ENDIF -->
-			  </a>
+              <a href="user.php?id={:topicInfo.uid}" class="{:topicInfo.uid}">{:topicInfo.nickname}</a>
+			  <!-- IF topicInfo.groupid == "2" -->
+			   <span class="tag">管理员</span>
+			  <!-- ENDIF -->
             </div>
             <div class="item-message">
               {:topicInfo.message}
@@ -110,11 +133,10 @@
               <a href="user.php?id={:uid}"><img src="{:avatar}"></a>
             </div>
             <div class="item-nickname">
-              <a href="user.php?id={:uid}">{:nickname} 
+              <a href="user.php?id={:uid}" class="{:uid}">{:nickname}</a> 
 			   <!-- IF groupid > "1" -->
 			    <span class="tag">管理员</span>
 			   <!-- ENDIF -->
-			  </a>
             </div>
             <div class="item-message">
               {:message}

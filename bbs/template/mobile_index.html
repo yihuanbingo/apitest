@@ -34,7 +34,7 @@
 <script type="text/javascript">
 <!-- BEGIN topicList.list -->
 $(function () {
-  var $text = $('#{:uid}');
+  var $text = $('.{:uid}');
   var html = $text.html().trim().replace(/\n/g, '<br/>');
   html = jEmoji.softbankToUnified(html);
   html = jEmoji.googleToUnified(html);
@@ -76,7 +76,7 @@ $(function () {
               <a href="user.php?id={:uid}"><img src="{:avatar}"></a>
             </div>
             <div class="item-nickname">
-              <a href="user.php?id={:uid}" id="{:uid}">{:nickname}</a> 
+              <a href="user.php?id={:uid}" class="{:uid}">{:nickname}</a>
 			  <!-- IF groupid == "2" -->
 			   <span class="tag">管理员</span>
 			  <!-- ENDIF -->
